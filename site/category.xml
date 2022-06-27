@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description>
+      To install these features, point Eclipse at this site.
+   </description>
+   <feature id="hu.blackbelt.judo.meta.expression.builder.jql.asm.feature.source">
+      <category name="asm_adapters_source"/>
+   </feature>
+   <feature id="hu.blackbelt.judo.meta.expression.adapter.asm.feature.source">
+      <category name="asm_adapters_source"/>
+   </feature>
+   <feature id="hu.blackbelt.judo.meta.expression.builder.jql.asm.feature">
+      <category name="asm_adapter"/>
+   </feature>
+   <feature id="hu.blackbelt.judo.meta.expression.adapter.asm.feature">
+      <category name="asm_adapter"/>
+   </feature>
+   <category-def name="asm_adapter" label="JUDO Expression ASM Adapter">
+      <description>
+         JUDO Expression Model ASM adapters
+      </description>
+   </category-def>
+   <category-def name="asm_adapters_source" label="JUDO Expression ASM Adapter Source">
+      <description>
+         Judo Expression Model adapters for other metamodels source
+      </description>
+   </category-def>
+</site>
