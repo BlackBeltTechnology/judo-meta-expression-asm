@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>hu.blackbelt.judo.meta</groupId>
+        <artifactId>hu.blackbelt.judo.meta.expression.asm</artifactId>
+        <version>${revision}</version>
+    </parent>
+    
+    <artifactId>hu.blackbelt.judo.meta.expression.builder.jql.asm.feature</artifactId>
+    <packaging>eclipse-feature</packaging>
+
+    <name>JUDO :: Expression :: ASM Adapter :: JQL Builder feature</name>
+    <description>JUDO Expression jql builder asm feature</description>
+    
+</project>
