@@ -59,8 +59,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.4.0.20220616_093846_72efef9e_develop</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.4.0.20220616_120313_0d84d4a0_develop</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.4.0.20220629_123622_4279f257_develop</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.4.0.20220629_124147_7f70e44e_develop</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -84,10 +84,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.1.20220619_080709_a8a43869_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.0.20220618_232613_0c08e3ef_develop</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.1.20220618_232004_193cd19d_develop</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.0.20220618_232641_47cbbd4b_develop</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.1.20220629_130101_a1e14717_develop</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.0.20220629_125026_5f754291_develop</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.1.20220629_123627_2802d30e_develop</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.0.20220629_125044_16e15b24_develop</judo-meta-measure-version>
 
         <log4j.configuration>log4j.properties</log4j.configuration>
 
@@ -360,7 +360,7 @@
     									</goals>
     								</pluginExecutionFilter>
     								<action>
-    									<ignore></ignore>
+    									<ignore />
     								</action>
     							</pluginExecution>
     							<pluginExecution>
@@ -381,7 +381,7 @@
     									</goals>
     								</pluginExecutionFilter>
     								<action>
-    									<ignore></ignore>
+    									<ignore />
     								</action>
     							</pluginExecution>
                             </pluginExecutions>
