@@ -7,8 +7,6 @@ image::https://github.com/BlackBeltTechnology/judo-meta-expression-asm/actions/w
 Connects https://github.com/BlackBeltTechnology/judo-meta-expression[Expression] models with https://github.com/BlackBeltTechnology/judo-meta-asm[ASM] models.
 Adapters most of the time resolve references (e.g.: ids) defined in models to ASM model elements.
 
-TODO: add missing section (similar to judo-meta-asm)
-
 == Contributing to the project
 
 Everyone is welcome to contribute to JUDO! As a starter, please read the corresponding link:CONTRIBUTING.adoc[CONTRIBUTING] guide for details!
