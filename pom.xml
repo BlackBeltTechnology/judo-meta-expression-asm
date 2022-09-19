@@ -79,8 +79,8 @@
         <judo-genmodel-generator-version>1.0.1.20220916_103853</judo-genmodel-generator-version>
         <judo-epp-common-version>4.23.0.20220919_071730</judo-epp-common-version>
 
-        <xtext-version>2.27.0</xtext-version>
-        <emf-mwe2-launch-version>2.12.1</emf-mwe2-launch-version>
+        <xtext-version>2.28.0</xtext-version>
+        <emf-mwe2-launch-version>2.13.0</emf-mwe2-launch-version>
         <slf4j-version>1.7.36</slf4j-version>
         <surefire-version>3.0.0-M7</surefire-version>
         <!--suppress UnresolvedMavenProperty -->
@@ -92,7 +92,7 @@
         <pax-exam-version>4.13.4</pax-exam-version>
 
 		<judo-meta-expression-version>1.0.1.20220902_155839_54554c59_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.0.20220901_121048_5b18a69d_develop</judo-meta-asm-version>
+        <judo-meta-asm-version>1.1.0.20220919_144630</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.1.20220901_121131_aff994b2_develop</judo-meta-jql-version>
         <judo-meta-measure-version>1.0.0.20220901_121041_607ea7b1_develop</judo-meta-measure-version>
 
@@ -311,7 +311,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-deploy-plugin</artifactId>
-                    <version>2.8.2</version>
+                    <version>3.0.0</version>
                     <!-- https://stackoverflow.com/questions/36328154/maven-deploy-plugin-deployatend-not-working -->
                     <!-- <configuration> <deployAtEnd>true</deployAtEnd> </configuration> -->
                 </plugin>
@@ -502,7 +502,7 @@
                 <plugin>
                     <groupId>org.sonatype.plugins</groupId>
                     <artifactId>nexus-staging-maven-plugin</artifactId>
-                    <version>1.6.8</version>
+                    <version>1.6.13</version>
                 </plugin>
 
                 <plugin>
@@ -926,7 +926,7 @@
 
             <properties>
                 <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-                <asciidoctorj.version>2.5.5</asciidoctorj.version>
+                <asciidoctorj.version>2.5.6</asciidoctorj.version>
                 <asciidoctorj.diagram.version>2.2.3</asciidoctorj.diagram.version>
                 <jruby.version>9.3.4.0</jruby.version>
             </properties>
