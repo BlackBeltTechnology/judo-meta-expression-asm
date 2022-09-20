@@ -1055,12 +1055,6 @@
                                 <phase>process-sources</phase>
                                 <configuration>
                                     <licenseName>epl_v2</licenseName>
-                                    <roots>
-                                        <root>adapter-asm/src/main/java</root>
-                                        <root>adapter-asm-test/src/test/java</root>
-                                        <root>builder-jql-asm/src/main/java</root>
-                                        <root>builder-jql-asm-test/src/test/java</root>
-                                    </roots>
                                 </configuration>
                             </execution>
                             <execution>
