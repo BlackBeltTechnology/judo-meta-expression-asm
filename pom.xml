@@ -66,8 +66,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.5.1.20220915_170323_044ded18_develop</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.5.1.20220923_132948_d0d669bc_develop</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.5.1.20221005_230707_b5e4278d_develop</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.5.1.20221005_231518_678a5c17_develop</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -76,7 +76,7 @@
         <tycho-version>2.7.5</tycho-version>
 
         <emf-genmodel-generator-version>1.1.1.20220930_100337_62864061_develop</emf-genmodel-generator-version>
-        <judo-genmodel-generator-version>1.1.2.20220928_125409_3d04ec1d_develop</judo-genmodel-generator-version>
+        <judo-genmodel-generator-version>1.1.2.20221005_230703_6a1653f3_develop</judo-genmodel-generator-version>
         <judo-epp-common-version>4.23.2.20220923_134801_d39d5940_develop</judo-epp-common-version>
 
         <xtext-version>2.28.0</xtext-version>
@@ -91,10 +91,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.2.20221005_135846_bc0821eb_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.2.20220921_230227_7d158c9b_develop</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.2.20221004_225904_6d3e8bdf_develop</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.1.20220921_224938_dbd1c8fa_develop</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.2.20221005_232645_bd44212d_develop</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.2.20221005_232439_c35b63bf_develop</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.2.20221005_231503_a3db91bb_develop</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.1.20221005_232337_1ea69442_develop</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
