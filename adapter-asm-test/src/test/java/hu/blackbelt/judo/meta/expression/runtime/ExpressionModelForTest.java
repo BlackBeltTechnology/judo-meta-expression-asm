@@ -206,7 +206,7 @@ public class ExpressionModelForTest {
         
         KleeneExpression and = newKleeneExpressionBuilder().withOperator(LogicalOperator.AND)
         		.withLeft(newDecimalComparisonBuilder()
-        				.withLeft(newRoundExpressionBuilder()
+        				.withLeft(newIntegerRoundExpressionBuilder()
         						.withExpression(newDecimalConstantBuilder().withValue(BigDecimal.valueOf(-1.5)).build())
         						.build())
         				.withRight(newDecimalConstantBuilder().withValue(BigDecimal.valueOf(1.2)).build())
