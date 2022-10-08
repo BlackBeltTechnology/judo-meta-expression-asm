@@ -37,7 +37,6 @@ import static hu.blackbelt.judo.meta.expression.util.builder.ExpressionBuilders.
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 
-import hu.blackbelt.judo.meta.expression.constant.util.builder.IntegerConstantBuilder;
 import org.eclipse.emf.common.util.URI;
 
 import java.math.BigDecimal;
