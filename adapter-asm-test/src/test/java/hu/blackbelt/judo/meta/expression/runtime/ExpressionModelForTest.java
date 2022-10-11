@@ -451,7 +451,7 @@ public class ExpressionModelForTest {
         		.withCollectionExpression(newCollectionNavigationFromObjectExpressionBuilder().withReferenceName("orderDetails")
         				.withIteratorVariable(odOrderDetailsIterator)
         				.withObjectExpression(newInstanceBuilder().withElementName(order).build()).build())
-        		.withCondition(newUndefinedAttributeComparisonBuilder().withAttributeSelector(newCustomAttributeBuilder().withAttributeName("picture")
+        		.withCondition(newUndefinedComparisonBuilder().withExpression(newCustomAttributeBuilder().withAttributeName("picture")
         				.withObjectExpression(newObjectNavigationExpressionBuilder().withReferenceName("category")
         						.withObjectExpression(newObjectNavigationExpressionBuilder().withReferenceName("product")
         								.withObjectExpression(newObjectVariableReferenceBuilder().withVariable(odOrderDetailsIterator).build())
