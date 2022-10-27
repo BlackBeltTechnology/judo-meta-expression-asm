@@ -429,10 +429,9 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         createExpression("1.0 * 3.14");
         createExpression("1.0 / 3.14");
         createExpression("1 < 3.14");
-        Expression decimalDivision = createExpression("1 / 2");
-        assertThat(decimalDivision, instanceOf(DecimalExpression.class));
-        assertThrows(UnsupportedOperationException.class, () -> createExpression("1.0 mod 2"));
-        assertThrows(UnsupportedOperationException.class, () -> createExpression("1.0 div 2"));
+        createExpression("1.0 mod 2");
+        createExpression("1.0 div 2");
+        assertThat(createExpression("1 / 2"), instanceOf(DecimalExpression.class));
     }
 
     @Test
