@@ -206,7 +206,7 @@ public class ExpressionModelForTest {
         
         KleeneExpression and = newKleeneExpressionBuilder().withOperator(LogicalOperator.AND)
         		.withLeft(newDecimalComparisonBuilder()
-        				.withLeft(newRoundExpressionBuilder()
+        				.withLeft(newIntegerRoundExpressionBuilder()
         						.withExpression(newDecimalConstantBuilder().withValue(BigDecimal.valueOf(-1.5)).build())
         						.build())
         				.withRight(newDecimalConstantBuilder().withValue(BigDecimal.valueOf(1.2)).build())
@@ -451,7 +451,7 @@ public class ExpressionModelForTest {
         		.withCollectionExpression(newCollectionNavigationFromObjectExpressionBuilder().withReferenceName("orderDetails")
         				.withIteratorVariable(odOrderDetailsIterator)
         				.withObjectExpression(newInstanceBuilder().withElementName(order).build()).build())
-        		.withCondition(newUndefinedAttributeComparisonBuilder().withAttributeSelector(newCustomAttributeBuilder().withAttributeName("picture")
+        		.withCondition(newUndefinedComparisonBuilder().withExpression(newCustomAttributeBuilder().withAttributeName("picture")
         				.withObjectExpression(newObjectNavigationExpressionBuilder().withReferenceName("category")
         						.withObjectExpression(newObjectNavigationExpressionBuilder().withReferenceName("product")
         								.withObjectExpression(newObjectVariableReferenceBuilder().withVariable(odOrderDetailsIterator).build())
