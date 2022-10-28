@@ -92,7 +92,7 @@
         <pax-exam-version>4.13.4</pax-exam-version>
 
 		<judo-meta-expression-version>1.0.2</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.2</judo-meta-asm-version>
+        <judo-meta-asm-version>1.1.3.20221028_175510_1c2f2dc9_bugfix_JNG_4196_support_static_queries_for_sdk</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.2</judo-meta-jql-version>
         <judo-meta-measure-version>1.0.1</judo-meta-measure-version>
 
