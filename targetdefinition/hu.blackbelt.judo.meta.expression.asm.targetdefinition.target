@@ -26,7 +26,7 @@
     </location>
 
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-      <repository location="file:/Users/noherczeg/projects/judo-community/judo-meta-asm/site/target/repository"/>
+      <repository location="https://nexus.judo.technology/repository/p2/judo-meta-asm/1.1.3.20221028_175510_1c2f2dc9_bugfix_JNG_4196_support_static_queries_for_sdk"/>
       <unit id="hu.blackbelt.judo.meta.asm.feature.feature.group" version="0.0.0"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
