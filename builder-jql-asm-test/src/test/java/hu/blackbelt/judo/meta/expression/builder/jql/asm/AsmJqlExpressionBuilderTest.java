@@ -859,13 +859,10 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!kindOf(schools::Student)"));
-        assertTrue(exception.getMessage().contains("Element type Student is not compatible with School"));
+        assertTrue(exception.getMessage().contains("Invalid kindof function call: schools.School cannot be casted to schools.Student"));
 
-        // #2 invalid - reverse
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!kindOf(schools::Person)"));
-        assertTrue(exception2.getMessage().contains("Element type Person is not compatible with Student"));
+        // #2 valid - reverse
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!kindOf(schools::Person)"));
 
         // #3 valid - different
         assertDoesNotThrow(() -> createExpression(findBase("Person"), "self!kindOf(schools::Student)"));
@@ -880,13 +877,10 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!kindOf(Student)"));
-        assertTrue(exception.getMessage().contains("Element type Student is not compatible with School"));
+        assertTrue(exception.getMessage().contains("Invalid kindof function call: schools.School cannot be casted to schools.Student"));
 
-        // #2 invalid - reverse
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!kindOf(Person)"));
-        assertTrue(exception2.getMessage().contains("Element type Person is not compatible with Student"));
+        // #2 valid - reverse
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!kindOf(Person)"));
 
         // #3 valid - different
         assertDoesNotThrow(() -> createExpression(findBase("Person"), "self!kindOf(Student)"));
@@ -901,13 +895,10 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!typeOf(schools::Student)"));
-        assertTrue(exception.getMessage().contains("Element type Student is not School"));
+        assertTrue(exception.getMessage().contains("Invalid typeof function call: schools.School cannot be casted to schools.Student"));
 
-        // #2 invalid - reverse
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!typeOf(schools::Person)"));
-        assertTrue(exception2.getMessage().contains("Element type Person is not Student"));
+        // #2 valid - reverse
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!typeOf(schools::Person)"));
 
         // #3 valid - different
         assertDoesNotThrow(() -> createExpression(findBase("Person"), "self!typeOf(schools::Student)"));
@@ -922,13 +913,10 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!typeOf(Student)"));
-        assertTrue(exception.getMessage().contains("Element type Student is not School"));
+        assertTrue(exception.getMessage().contains("Invalid typeof function call: schools.School cannot be casted to schools.Student"));
 
-        // #2 invalid - reverse
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!typeOf(Person)"));
-        assertTrue(exception2.getMessage().contains("Element type Person is not Student"));
+        // #2 valid - reverse
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!typeOf(Person)"));
 
         // #3 valid - different
         assertDoesNotThrow(() -> createExpression(findBase("Person"), "self!typeOf(Student)"));
@@ -943,19 +931,13 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!asType(schools::Student)"));
-        assertTrue(exception.getMessage().contains("Invalid casting type: School is not supertype of Student"));
+        assertTrue(exception.getMessage().contains("Invalid astype function call: schools.School cannot be casted to schools.Student"));
 
-        // #2 invalid - reverse
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!asType(schools::Person)"));
-        assertTrue(exception2.getMessage().contains("Invalid casting type: Student is not supertype of Person"));
+        // #2 valid - reverse
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!asType(schools::Person)"));
 
-        // #3 invalid - same
-        JqlExpressionBuildException exception3 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!asType(schools::Student)"));
-        assertTrue(exception3.getMessage().contains("Invalid casting type: Student is not supertype of Student"));
+        // #3 valid - same
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!asType(schools::Student)"));
 
         // #4 valid
         assertDoesNotThrow(() -> createExpression(findBase("Person"), "self!asType(schools::Student)"));
@@ -967,19 +949,13 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!asType(Student)"));
-        assertTrue(exception.getMessage().contains("Invalid casting type: School is not supertype of Student"));
+        assertTrue(exception.getMessage().contains("Invalid astype function call: schools.School cannot be casted to schools.Student"));
 
-        // #2 invalid - reverse
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!asType(Person)"));
-        assertTrue(exception2.getMessage().contains("Invalid casting type: Student is not supertype of Person"));
+        // #2 valid - reverse
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!asType(Person)"));
 
-        // #3 invalid - same
-        JqlExpressionBuildException exception3 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("Student"), "self!asType(Student)"));
-        assertTrue(exception3.getMessage().contains("Invalid casting type: Student is not supertype of Student"));
+        // #3 valid - same
+        assertDoesNotThrow(() -> createExpression(findBase("Student"), "self!asType(Student)"));
 
         // #4 valid
         assertDoesNotThrow(() -> createExpression(findBase("Person"), "self!asType(Student)"));
@@ -991,13 +967,13 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!container(schools::Class)"));
-        assertTrue(exception.getMessage().contains("Class type is not a container of School"));
+        assertTrue(exception.getMessage().contains("schools.Class type is not a container type of schools.School"));
 
         // #2 invalid - same
         JqlExpressionBuildException exception2 =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("Class"), "self!container(schools::Class)"));
-        assertTrue(exception2.getMessage().contains("Class type is not a container of Class"));
+        assertTrue(exception2.getMessage().contains("schools.Class type is not a container type of schools.Class"));
 
         // #3 valid
         assertDoesNotThrow(() -> createExpression(findBase("Class"), "self!container(schools::School)"));
@@ -1009,13 +985,13 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self!container(Class)"));
-        assertTrue(exception.getMessage().contains("Class type is not a container of School"));
+        assertTrue(exception.getMessage().contains("schools.Class type is not a container type of schools.School"));
 
         // #2 invalid - same
         JqlExpressionBuildException exception2 =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("Class"), "self!container(Class)"));
-        assertTrue(exception2.getMessage().contains("Class type is not a container of Class"));
+        assertTrue(exception2.getMessage().contains("schools.Class type is not a container type of schools.Class"));
 
         // #3 valid
         assertDoesNotThrow(() -> createExpression(findBase("Class"), "self!container(School)"));
@@ -1099,13 +1075,10 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self.classes!asCollection(schools::Student)"));
-        assertTrue(exception.getMessage().contains("Invalid casting: Class as Student. Class is not supertype of Student"));
+        assertTrue(exception.getMessage().contains("Invalid astype function call: schools.Class cannot be casted to schools.Student"));
 
-        // #2 invalid - same type
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("School"), "self.classes!asCollection(schools::Class)"));
-        assertTrue(exception2.getMessage().contains("Invalid casting: Class as Class. Class is not supertype of Class"));
+        // #2 valid - same type
+        assertDoesNotThrow(() -> createExpression(findBase("School"), "self.classes!asCollection(schools::Class)"));
 
         // #3 valid
         assertDoesNotThrow(() -> findBase("Student"), "self.parents!asCollection(schools::Student)");
@@ -1117,13 +1090,10 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () ->
                         createExpression(findBase("School"), "self.classes!asCollection(Student)"));
-        assertTrue(exception.getMessage().contains("Invalid casting: Class as Student. Class is not supertype of Student"));
+        assertTrue(exception.getMessage().contains("Invalid astype function call: schools.Class cannot be casted to schools.Student"));
 
         // #2 invalid - same type
-        JqlExpressionBuildException exception2 =
-                assertThrows(JqlExpressionBuildException.class, () ->
-                        createExpression(findBase("School"), "self.classes!asCollection(Class)"));
-        assertTrue(exception2.getMessage().contains("Invalid casting: Class as Class. Class is not supertype of Class"));
+        assertDoesNotThrow(() -> createExpression(findBase("School"), "self.classes!asCollection(Class)"));
 
         // #3 valid
         assertDoesNotThrow(() -> findBase("Student"), "self.parents!asCollection(Student)");
