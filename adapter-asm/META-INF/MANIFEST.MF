@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: JUDO Expression ASM Model Adapter
 Bundle-SymbolicName: hu.blackbelt.judo.meta.expression.model.adapter.asm;singleton:=true
-Bundle-Version: 1.0.4.qualifier
+Bundle-Version: 1.0.4
 Bundle-ClassPath: .
 Bundle-Vendor: BlackBelt Technology
 Bundle-Localization: plugin
