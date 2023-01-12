@@ -145,7 +145,7 @@
         </repository>
 
         <repository>
-            <id>judo-meta-asn</id>
+            <id>judo-meta-asm</id>
             <url>mvn:hu.blackbelt.judo.meta:hu.blackbelt.judo.meta.asm.site:${judo-meta-asm-version}:zip</url>
             <layout>p2</layout>
         </repository>
