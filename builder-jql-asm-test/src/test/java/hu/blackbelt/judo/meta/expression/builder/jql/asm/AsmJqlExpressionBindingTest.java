@@ -120,7 +120,7 @@ public class AsmJqlExpressionBindingTest extends ExecutionContextOnAsmTest {
                             "StringExpressionMatchesBinding|Attribute named orderDate must be string type, because the assigned expression evaluates to a string.",
                             "TimestampExpressionMatchesBinding|Attribute named freight must be timestamp type, because the assigned expression evaluates to a timestamp.",
                             "TimeExpressionMatchesBinding|Attribute named shipperName must be time type, because the assigned expression evaluates to a time.",
-                            "DecimalExpressionMatchesBinding|Attribute named customsDescription must be decimal type, because the assigned expression evaluates to a decimal.",
+                            "NumericExpressionMatchesBinding|Attribute named customsDescription must be numeric type, because the assigned expression evaluates to a number.",
                             "DateExpressionMatchesBinding|Attribute named productName must be date type, because the assigned expression evaluates to a date.",
                             "EnumerationExpressionMatchesBinding|Attribute named unitPrice must be enumeration type, because the assigned expression evaluates to an enumeration.",
                             "BooleanExpressionMatchesBinding|Attribute named weight must be boolean type, because the assigned expression evaluates to a boolean."),
