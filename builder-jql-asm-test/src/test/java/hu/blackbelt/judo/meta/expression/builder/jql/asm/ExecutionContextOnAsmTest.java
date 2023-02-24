@@ -56,7 +56,6 @@ public class ExecutionContextOnAsmTest {
     void setUp() throws Exception {
         asmModel = buildAsmModel()
                 .uri(URI.createURI("urn:asm.judo-meta-asm"))
-                .name("demo")
                 .build();
         
         asmUtils = new AsmUtils(asmModel.getResourceSet());
