@@ -91,10 +91,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20230224_162615_2c897271_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20230224_162040_b3edd881_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20230224_162058_76f0cb81_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20230224_161953_e6e85088_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20230227_073034_bc09d3f2_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20230226_193929_e29cf4f3_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20230226_194009_b9ae804e_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20230226_194033_b66023bf_feature_JNG_4269_SemiAutomaticSchemaUpgrade</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
