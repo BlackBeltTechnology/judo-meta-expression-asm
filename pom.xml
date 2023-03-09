@@ -588,6 +588,25 @@
                         <useProjectSettings>false</useProjectSettings>
                     </configuration>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.projectlombok</groupId>
+                    <artifactId>lombok-maven-plugin</artifactId>
+                    <version>1.18.24.0</version>
+                    <configuration>
+                        <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
+                        <outputDirectory>${project.basedir}/target/delombok</outputDirectory>
+                        <addOutputDirectory>false</addOutputDirectory>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <phase>generate-sources</phase>
+                            <goals>
+                                <goal>delombok</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
                 <!-- to skip running (and compiling) tests use commandline flag: -Dmaven.test.skip
                     To skip tests, but still compile them, use: -DskipTests
                     To allow all tests in a pom to pass/fail, use commandline flag: -fae (fail
@@ -709,7 +728,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.4.1</version>
+                <version>1.2.11</version>
             </dependency>
 
             <dependency>
