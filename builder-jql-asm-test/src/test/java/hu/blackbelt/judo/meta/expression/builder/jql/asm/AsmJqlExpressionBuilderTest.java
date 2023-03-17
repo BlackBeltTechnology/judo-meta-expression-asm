@@ -824,8 +824,8 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         createExpression("9[mm]/(1/45[cm])");
         createExpression("9[mg] < 2[kg]");
         createExpression("`2019-01-02T03:04:05.678+01:00` + 102[s]");
-        Expression timeStampAddition = createExpression("demo::entities::Order!sort()!head().orderDate - 3[day]");
-        assertThat(timeStampAddition, instanceOf(TimestampExpression.class));
+        Expression timestampAddition = createExpression("demo::entities::Order!sort()!head().orderDate - 3[day]");
+        assertThat(timestampAddition, instanceOf(TimestampExpression.class));
         createExpression("`2019-01-02T03:04:05.678+01:00`!elapsedTimeFrom(`2019-01-30T15:57:08.123+01:00`)");
 
         Expression customerExpression = createExpression(
