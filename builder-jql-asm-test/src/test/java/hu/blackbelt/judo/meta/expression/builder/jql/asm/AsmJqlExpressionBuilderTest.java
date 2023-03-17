@@ -26,8 +26,7 @@ import hu.blackbelt.judo.meta.asm.runtime.AsmUtils;
 import hu.blackbelt.judo.meta.expression.*;
 import hu.blackbelt.judo.meta.expression.builder.jql.*;
 import hu.blackbelt.judo.meta.expression.collection.*;
-import hu.blackbelt.judo.meta.expression.constant.DateConstant;
-import hu.blackbelt.judo.meta.expression.constant.MeasuredDecimal;
+import hu.blackbelt.judo.meta.expression.constant.*;
 import hu.blackbelt.judo.meta.expression.numeric.DecimalSwitchExpression;
 import hu.blackbelt.judo.meta.expression.object.*;
 import hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator;
@@ -45,6 +44,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.time.*;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
@@ -1191,6 +1191,140 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         JqlExpressionBuildException exception =
                 assertThrows(JqlExpressionBuildException.class, () -> createExpression("schools::Person.height"));
         assertThat(exception.getMessage(), containsString(INVALID_ATTRIBUTE_SELECTOR));
+    }
+
+    @Test
+    public void testTimeCreation() {
+        Expression expression = assertDoesNotThrow(() -> createExpression("`11:11`"));
+        assertTrue(expression instanceof TimeConstant);
+        assertEquals(LocalTime.parse("11:11"), ((TimeConstant) expression).getValue());
+
+        Expression expression1 = assertDoesNotThrow(() -> createExpression("`11:11:11`"));
+        assertTrue(expression1 instanceof TimeConstant);
+        assertEquals(LocalTime.parse("11:11:11"), ((TimeConstant) expression1).getValue());
+
+        Expression expression2 = assertDoesNotThrow(() -> createExpression("`11:11:11.111`"));
+        assertTrue(expression2 instanceof TimeConstant);
+        assertEquals(LocalTime.parse("11:11:11.111"), ((TimeConstant) expression2).getValue());
+
+        Expression expression3 = assertDoesNotThrow(() -> createExpression("demo::types::Time!of(11, 11)"));
+        Expression expression4 = assertDoesNotThrow(() -> createExpression("demo::types::Time!of(11, 11, 11)"));
+        Expression expression5 = assertDoesNotThrow(() -> createExpression("demo::types::Time!of(11, 11, 11, 111)"));
+
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Time!of()"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Time!of(11)"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Time!of(11, 11, 11, 11, 11)"));
+    }
+
+    @Test
+    public void testTimestampCreation() {
+        Expression timestampConstant1 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11`"));
+        assertTrue(timestampConstant1 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant1).getValue(), LocalDateTime.parse("2023-03-17T11:11"));
+
+        Expression timestampConstant2 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11Z`"));
+        assertTrue(timestampConstant2 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant2).getValue(), OffsetDateTime.parse("2023-03-17T11:11Z").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant3 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11+01`"));
+        assertTrue(timestampConstant3 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant3).getValue(), OffsetDateTime.parse("2023-03-17T11:11+01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant4 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11-01`"));
+        assertTrue(timestampConstant4 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant4).getValue(), OffsetDateTime.parse("2023-03-17T11:11-01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant5 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11+01:01`"));
+        assertTrue(timestampConstant5 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant5).getValue(), OffsetDateTime.parse("2023-03-17T11:11+01:01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant6 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11-01:01`"));
+        assertTrue(timestampConstant6 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant6).getValue(), OffsetDateTime.parse("2023-03-17T11:11-01:01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant7 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11`"));
+        assertTrue(timestampConstant7 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant7).getValue(), LocalDateTime.parse("2023-03-17T11:11:11"));
+
+        Expression timestampConstant8 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11Z`"));
+        assertTrue(timestampConstant8 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant8).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11Z").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant9 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11+01`"));
+        assertTrue(timestampConstant9 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant9).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11+01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant10 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11-01`"));
+        assertTrue(timestampConstant10 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant10).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11-01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant11 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11+01:01`"));
+        assertTrue(timestampConstant11 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant11).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11+01:01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant12 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11-01:01`"));
+        assertTrue(timestampConstant12 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant12).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11-01:01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant13 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11.111`"));
+        assertTrue(timestampConstant13 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant13).getValue(), LocalDateTime.parse("2023-03-17T11:11:11.111"));
+
+        Expression timestampConstant14 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11.111Z`"));
+        assertTrue(timestampConstant14 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant14).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11.111Z").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant15 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11.111+01`"));
+        assertTrue(timestampConstant15 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant15).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11.111+01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant16 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11.111-01`"));
+        assertTrue(timestampConstant16 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant16).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11.111-01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant17 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11.111+01:01`"));
+        assertTrue(timestampConstant17 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant17).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11.111+01:01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampConstant18 = assertDoesNotThrow(() -> createExpression("`2023-03-17T11:11:11.111-01:01`"));
+        assertTrue(timestampConstant18 instanceof TimestampConstant);
+        assertEquals(((TimestampConstant) timestampConstant18).getValue(), OffsetDateTime.parse("2023-03-17T11:11:11.111-01:01").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime());
+
+        Expression timestampFromDate = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(`2022-09-19`)"));
+        Expression timestampFromDateAndTime = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(`2022-09-19`, `11:11`)"));
+        Expression timestampFromDateAndTime1 = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(`2022-09-19`, `11:11:11`)"));
+        Expression timestampFromDateAndTime2 = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(`2022-09-19`, `11:11:11.111`)"));
+        Expression timestampFromDateAndTimeConstruction = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(demo::types::Date!of(2022, 09, 19), demo::types::Time!of(11, 11))"));
+        Expression timestampFromDateAndTimeConstruction1 = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(demo::types::Date!of(2022, 09, 19), demo::types::Time!of(11, 11, 11))"));
+        Expression timestampFromDateAndTimeConstruction2 = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(demo::types::Date!of(2022, 09, 19), demo::types::Time!of(11, 11, 11, 11))"));
+        Expression timestampFromIntegers = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(2022, 9, 19, 11, 11)"));
+        Expression timestampFromIntegers1 = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(2022, 9, 19, 11, 11, 11)"));
+        Expression timestampFromIntegers2 = assertDoesNotThrow(() -> createExpression("demo::types::Timestamp!of(2022, 9, 19, 11, 11, 11, 11)"));
+
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Timestamp!of(`11:11:11`)"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Timestamp!of(`11:11:11`, `2022-09-19`)"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Timestamp!of(2022, 9, 19, 11)"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Timestamp!of(2022, 9, 19, 11, 11, 11, 11, 11)"));
+    }
+
+    @Test
+    public void testTimestampConversion() {
+        Expression timestampAsMilliseconds = createExpression("demo::types::Timestamp!of(`2022-09-19`)!asMilliseconds()");
+        Expression timestampFromMilliseconds = createExpression("demo::types::Timestamp!fromMilliseconds(9999999999)");
+
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Timestamp!fromMilliseconds()"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Timestamp!fromMilliseconds(9999999999, 999999)"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Date!fromMilliseconds(9999999999)"));
+    }
+
+    @Test
+    public void testTimeConversion() {
+        Expression timeAsMilliseconds = createExpression("demo::types::Time!of(11, 11, 11)!asMilliseconds()");
+        Expression timeFromMilliseconds = createExpression("demo::types::Time!fromMilliseconds(99999999)");
+
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Time!fromMilliseconds()"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Time!fromMilliseconds(9999999999, 999999)"));
+        assertThrows(JqlExpressionBuildException.class, () -> createExpression("demo::types::Date!fromMilliseconds(9999999999)"));
     }
 
 }
