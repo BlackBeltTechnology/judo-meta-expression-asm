@@ -9,13 +9,13 @@ package hu.blackbelt.judo.meta.expression.adapters.asm;
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * This Source Code may also be made available under the following Secondary
  * Licenses when the conditions for such availability set forth in the Eclipse
  * Public License, v. 2.0 are satisfied: GNU General Public License, version 2
  * with the GNU Classpath Exception which is
  * available at https://www.gnu.org/software/classpath/license.html.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  * #L%
  */
@@ -47,9 +47,9 @@ public class AsmMeasureSupportTest extends ExecutionContextOnAsmTest {
 
     @BeforeEach
     public void setUp() throws Exception {
-    	super.setUp();
+        super.setUp();
         modelAdapter = new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet());
-        
+
         product = asmUtils.all(EClass.class).filter(c -> c.getName().equals("Product")).findAny().get();
         doubleType = asmUtils.all(EDataType.class).filter(t -> t.getName().equals("Double")).findAny().get();
     }
