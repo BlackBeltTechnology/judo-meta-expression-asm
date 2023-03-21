@@ -9,13 +9,13 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * This Source Code may also be made available under the following Secondary
  * Licenses when the conditions for such availability set forth in the Eclipse
  * Public License, v. 2.0 are satisfied: GNU General Public License, version 2
  * with the GNU Classpath Exception which is
  * available at https://www.gnu.org/software/classpath/license.html.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  * #L%
  */
@@ -829,20 +829,20 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
         createExpression("`2019-01-02T03:04:05.678+01:00`!elapsedTimeFrom(`2019-01-30T15:57:08.123+01:00`)");
 
         Expression customerExpression = createExpression(
-        		"demo::entities::Order!filter("
-        				+ "o | o=>orderDetails->product!contains("
-        					+ "demo::entities::Product!filter("
-        						+ "p | p.productName == 'Lenovo B51')!sort()!head()))"
-        		+ "!asCollection("
-        			+ "demo::entities::InternationalOrder)"
-        		+ "!filter(io | io.exciseTax > 1/2 + io=>orderDetails!sum("
-        			+ "iod | iod.unitPrice))"
-        		+ "!sort(iof | iof.freight, iof=>orderDetails!count() DESC)"
-        		+ "!head()->customer"
-        		+ "!filter(c | "
-        			+ "c=>addresses!sort()!head()"
-        			+ "!asType(demo::entities::InternationalAddress).country == demo::types::Countries#RO and c=>addresses!sort()!head().postalCode!matches('11%'))=>addresses"
-        		);
+                "demo::entities::Order!filter("
+                        + "o | o=>orderDetails->product!contains("
+                            + "demo::entities::Product!filter("
+                                + "p | p.productName == 'Lenovo B51')!sort()!head()))"
+                + "!asCollection("
+                    + "demo::entities::InternationalOrder)"
+                + "!filter(io | io.exciseTax > 1/2 + io=>orderDetails!sum("
+                    + "iod | iod.unitPrice))"
+                + "!sort(iof | iof.freight, iof=>orderDetails!count() DESC)"
+                + "!head()->customer"
+                + "!filter(c | "
+                    + "c=>addresses!sort()!head()"
+                    + "!asType(demo::entities::InternationalAddress).country == demo::types::Countries#RO and c=>addresses!sort()!head().postalCode!matches('11%'))=>addresses"
+                );
         assertThat(customerExpression, instanceOf(CollectionNavigationFromObjectExpression.class));
     }
 
