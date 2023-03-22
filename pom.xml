@@ -91,9 +91,9 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20230321_173750_b9b97228_feature_JNG_3902_Fix_timestamp_asstring</judo-meta-expression-version>
+		<judo-meta-expression-version>1.0.5.20230322_040741_9a76dcb5_develop</judo-meta-expression-version>
         <judo-meta-asm-version>1.1.4.20230310_041340_c5dd0888_develop</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20230321_173048_df8bbdc1_feature_JNG_3902_Fix_timestamp_asstring</judo-meta-jql-version>
+        <judo-meta-jql-version>1.0.4.20230321_161806_dc84a08e_develop</judo-meta-jql-version>
         <judo-meta-measure-version>1.0.2.20230310_041354_f9e5d334_develop</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
