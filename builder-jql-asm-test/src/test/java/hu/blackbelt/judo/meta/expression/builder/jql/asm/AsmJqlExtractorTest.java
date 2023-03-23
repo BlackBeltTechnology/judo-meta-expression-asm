@@ -9,13 +9,13 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * This Source Code may also be made available under the following Secondary
  * Licenses when the conditions for such availability set forth in the Eclipse
  * Public License, v. 2.0 are satisfied: GNU General Public License, version 2
  * with the GNU Classpath Exception which is
  * available at https://www.gnu.org/software/classpath/license.html.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  * #L%
  */
@@ -52,10 +52,10 @@ public class AsmJqlExtractorTest extends ExecutionContextOnAsmTest {
     ExpressionModelResourceSupport expressionModelResourceSupport;
     ExpressionModel expressionModel;
     ExpressionUtils expressionUtils;
-    
+
     @BeforeEach
     void setUp() throws Exception {
-    	super.setUp();
+        super.setUp();
         jqlExtractor = new AsmJqlExtractor(asmModel.getResourceSet(), measureModel.getResourceSet(), URI.createURI("urn:test.judo-meta-expression"));
     }
 
@@ -83,63 +83,63 @@ public class AsmJqlExtractorTest extends ExecutionContextOnAsmTest {
         expressionModelResourceSupport = ExpressionModelResourceSupport.expressionModelResourceSupportBuilder()
                 .resourceSet(expressionResourceSet)
                 .build();
-        
+
         expressionModel = ExpressionModel.buildExpressionModel()
                 .expressionModelResourceSupport(expressionModelResourceSupport)
                 .name(asmModel.getName())
                 .build();
-        
-  		log.info(expressionModel.getDiagnosticsAsString());
-    	assertTrue(expressionModel.isValid());
-		try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
-			validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
-		}
 
-    	expressionUtils = new ExpressionUtils(expressionResourceSet);
-    	
-    	Optional<EClassifier> shipper = asmUtils.resolve("demo.entities.Shipper");
-    	Optional<StringAttribute> shipperNameGetter = expressionUtils.all()
-    			.filter(e -> e instanceof StringAttribute).map(e -> (StringAttribute)e)
-    			.filter(e -> e.getAttributeName().equals("companyName"))
-    			.findAny();
-    	
-    	assertTrue(shipper.isPresent());
-    	assertTrue(shipperNameGetter.isPresent());
-    	assertTrue(shipperNameGetter.get().getObjectExpression().getObjectType(modelAdapter).equals(shipper.get()));
-    	
-    	Optional<EClassifier> employee = asmUtils.resolve("demo.entities.Employee");
-    	Optional<CollectionNavigationFromCollectionExpression> ordersAssignedToEmployeesGetter = expressionUtils.all()
-    			.filter(e -> e instanceof CollectionNavigationFromCollectionExpression)
-    			.map(e -> (CollectionNavigationFromCollectionExpression)e)
-    			.filter(e -> e.getCollectionExpression().toString().equals("demo::entities::Employee"))
-    			.findAny();
-    	
-    	assertTrue(employee.isPresent());
-    	assertTrue(ordersAssignedToEmployeesGetter.isPresent());
-    	assertTrue(ordersAssignedToEmployeesGetter.get().getCollectionExpression().getObjectType(modelAdapter).equals(employee.get()));
-    	
-    	Optional<EClassifier> product = asmUtils.resolve("demo.entities.Product");
-    	Optional<EClassifier> category = asmUtils.resolve("demo.entities.Category");
-    	
-    	Optional<CollectionNavigationFromObjectExpression> categoriesGetter = expressionUtils.all()
-    			.filter(e -> e instanceof CollectionNavigationFromObjectExpression)
-    			.map(e -> (CollectionNavigationFromObjectExpression)e)
-    			.filter(e -> e.getObjectType(modelAdapter).equals(category.get()))
-    			.findAny();
-    	
-    	assertTrue(product.isPresent());
-    	assertTrue(category.isPresent());
-    	assertTrue(categoriesGetter.isPresent());
-    	assertTrue(categoriesGetter.get().getObjectExpression().getObjectType(modelAdapter).equals(employee.get()));
-    	
-    	Optional<StringAttribute> productNameGetter = expressionUtils.all()
-    			.filter(e -> e instanceof StringAttribute).map(e -> (StringAttribute)e)
-    			.filter(e -> e.getAttributeName().equals("productName"))
-    			.findAny();
-    	
-    	assertTrue(productNameGetter.isPresent());
-    	assertTrue(productNameGetter.get().getObjectExpression().getObjectType(modelAdapter).equals(product.get()));
-    	
+          log.info(expressionModel.getDiagnosticsAsString());
+        assertTrue(expressionModel.isValid());
+        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
+        }
+
+        expressionUtils = new ExpressionUtils(expressionResourceSet);
+
+        Optional<EClassifier> shipper = asmUtils.resolve("demo.entities.Shipper");
+        Optional<StringAttribute> shipperNameGetter = expressionUtils.all()
+                .filter(e -> e instanceof StringAttribute).map(e -> (StringAttribute)e)
+                .filter(e -> e.getAttributeName().equals("companyName"))
+                .findAny();
+
+        assertTrue(shipper.isPresent());
+        assertTrue(shipperNameGetter.isPresent());
+        assertTrue(shipperNameGetter.get().getObjectExpression().getObjectType(modelAdapter).equals(shipper.get()));
+
+        Optional<EClassifier> employee = asmUtils.resolve("demo.entities.Employee");
+        Optional<CollectionNavigationFromCollectionExpression> ordersAssignedToEmployeesGetter = expressionUtils.all()
+                .filter(e -> e instanceof CollectionNavigationFromCollectionExpression)
+                .map(e -> (CollectionNavigationFromCollectionExpression)e)
+                .filter(e -> e.getCollectionExpression().toString().equals("demo::entities::Employee"))
+                .findAny();
+
+        assertTrue(employee.isPresent());
+        assertTrue(ordersAssignedToEmployeesGetter.isPresent());
+        assertTrue(ordersAssignedToEmployeesGetter.get().getCollectionExpression().getObjectType(modelAdapter).equals(employee.get()));
+
+        Optional<EClassifier> product = asmUtils.resolve("demo.entities.Product");
+        Optional<EClassifier> category = asmUtils.resolve("demo.entities.Category");
+
+        Optional<CollectionNavigationFromObjectExpression> categoriesGetter = expressionUtils.all()
+                .filter(e -> e instanceof CollectionNavigationFromObjectExpression)
+                .map(e -> (CollectionNavigationFromObjectExpression)e)
+                .filter(e -> e.getObjectType(modelAdapter).equals(category.get()))
+                .findAny();
+
+        assertTrue(product.isPresent());
+        assertTrue(category.isPresent());
+        assertTrue(categoriesGetter.isPresent());
+        assertTrue(categoriesGetter.get().getObjectExpression().getObjectType(modelAdapter).equals(employee.get()));
+
+        Optional<StringAttribute> productNameGetter = expressionUtils.all()
+                .filter(e -> e instanceof StringAttribute).map(e -> (StringAttribute)e)
+                .filter(e -> e.getAttributeName().equals("productName"))
+                .findAny();
+
+        assertTrue(productNameGetter.isPresent());
+        assertTrue(productNameGetter.get().getObjectExpression().getObjectType(modelAdapter).equals(product.get()));
+
         // test extracting expressions that are already extracted
         final long startTs2 = System.currentTimeMillis();
         expressionResourceSet = jqlExtractor.extractExpressions();
