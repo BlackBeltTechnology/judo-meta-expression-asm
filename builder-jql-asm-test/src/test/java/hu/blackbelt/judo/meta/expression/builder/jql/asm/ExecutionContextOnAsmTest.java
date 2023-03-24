@@ -83,7 +83,7 @@ public class ExecutionContextOnAsmTest {
                 newEEnumLiteralBuilder().withLiteral("SK").withName("SK").withValue(3).build()).build();
 
         //types
-        EDataType timestamp = newEDataTypeBuilder().withName("Timestamp").withInstanceClassName("java.time.OffsetDateTime").build();
+        EDataType timestamp = newEDataTypeBuilder().withName("Timestamp").withInstanceClassName("java.time.LocalDateTime").build();
         EDataType time = newEDataTypeBuilder().withName("Time").withInstanceClassName("java.time.LocalTime").build();
         EDataType stringType = newEDataTypeBuilder().withName("String").withInstanceClassName("java.lang.String").build();
         doubleType = newEDataTypeBuilder().withName("Double").withInstanceClassName("java.lang.Double").build();

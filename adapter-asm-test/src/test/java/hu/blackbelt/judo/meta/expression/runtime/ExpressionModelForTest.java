@@ -40,6 +40,7 @@ import java.time.OffsetDateTime;
 import org.eclipse.emf.common.util.URI;
 
 import java.math.BigDecimal;
+import java.time.ZoneOffset;
 
 import hu.blackbelt.judo.meta.expression.StringExpression;
 import hu.blackbelt.judo.meta.expression.TypeName;
@@ -319,10 +320,10 @@ public class ExpressionModelForTest {
                 .build();
 
         TimestampAdditionExpression tsAddExpr1 = newTimestampAdditionExpressionBuilder()
-                .withTimestamp(newTimestampConstantBuilder().withValue(OffsetDateTime.parse("2019-01-02T03:04:05.678+01:00")).build())
-                .withDuration(newMeasuredDecimalBuilder().withValue(BigDecimal.valueOf(102)).withUnitName("s").build())
-                .build();
-
+        		.withTimestamp(newTimestampConstantBuilder().withValue(OffsetDateTime.parse("2019-01-02T03:04:05.678+01:00").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()).build())
+        		.withDuration(newMeasuredDecimalBuilder().withValue(BigDecimal.valueOf(102)).withUnitName("s").build())
+        		.build();
+        
         TimestampAdditionExpression tsAddExpr2 = newTimestampAdditionExpressionBuilder().withOperator(TemporalOperator.SUBSTRACT)
                 .withTimestamp(newTimestampAttributeBuilder().withAttributeName("orderDate")
                         .withObjectExpression(newObjectSelectorExpressionBuilder()
@@ -335,10 +336,10 @@ public class ExpressionModelForTest {
                 .build();
 
         TimestampDifferenceExpression tsDiffExpr = newTimestampDifferenceExpressionBuilder()
-                .withStartTimestamp(newTimestampConstantBuilder().withValue(OffsetDateTime.parse("2019-01-02T03:04:05.678+01:00")).build())
-                .withEndTimestamp(newTimestampConstantBuilder().withValue(OffsetDateTime.parse("2019-01-30T15:57:08.123+01:00")).build())
-                .build();
-
+        		.withStartTimestamp(newTimestampConstantBuilder().withValue(OffsetDateTime.parse("2019-01-02T03:04:05.678+01:00").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()).build())
+        		.withEndTimestamp(newTimestampConstantBuilder().withValue(OffsetDateTime.parse("2019-01-30T15:57:08.123+01:00").atZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()).build())
+        		.build();
+        
         ContainerExpression contExpr = newContainerExpressionBuilder().withElementName(order)
                 .withObjectExpression(newInstanceBuilder().withName("self").withElementName(orderDetail).build())
                 .build();
