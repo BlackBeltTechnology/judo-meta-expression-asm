@@ -9,13 +9,13 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0.
- * 
+ *
  * This Source Code may also be made available under the following Secondary
  * Licenses when the conditions for such availability set forth in the Eclipse
  * Public License, v. 2.0 are satisfied: GNU General Public License, version 2
  * with the GNU Classpath Exception which is
  * available at https://www.gnu.org/software/classpath/license.html.
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0
  * #L%
  */
@@ -44,44 +44,44 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class ExecutionContextOnAsmTest {
-    
+
     AsmModel asmModel;
     MeasureModel measureModel;
     AsmModelAdapter modelAdapter;
     AsmUtils asmUtils;
-    
+
     protected EDataType doubleType;
     protected EDataType integerType;
-    
+
     void setUp() throws Exception {
         asmModel = buildAsmModel()
                 .uri(URI.createURI("urn:asm.judo-meta-asm"))
                 .build();
-        
+
         asmUtils = new AsmUtils(asmModel.getResourceSet());
         populateAsmModel();
 
         measureModel = buildMeasureModel()
                 .name(asmModel.getName())
                 .build();
-        
+
         populateMeasureModel();
-        
+
         assertTrue(asmModel.isValid(), () -> { log.info(asmModel.getDiagnosticsAsString()); return "ASM model is invalid"; });
         assertTrue(measureModel.isValid(), () -> { log.info(measureModel.getDiagnosticsAsString()); return "Measure model is invalid"; });
         runEpsilonOnMeasure();
         runEpsilonOnAsm();
-        
+
         modelAdapter = new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet());
     }
-    
+
     protected void populateAsmModel() {
         //enum
         EEnum countriesEnum = newEEnumBuilder().withName("Countries").withELiterals(newEEnumLiteralBuilder().withLiteral("HU").withName("HU").withValue(0).build(),
                 newEEnumLiteralBuilder().withLiteral("AT").withName("AT").withValue(1).build(),
                 newEEnumLiteralBuilder().withLiteral("RO").withName("RO").withValue(2).build(),
                 newEEnumLiteralBuilder().withLiteral("SK").withName("SK").withValue(3).build()).build();
-        
+
         //types
         EDataType timestamp = newEDataTypeBuilder().withName("Timestamp").withInstanceClassName("java.time.LocalDateTime").build();
         EDataType time = newEDataTypeBuilder().withName("Time").withInstanceClassName("java.time.LocalTime").build();
@@ -95,7 +95,7 @@ public class ExecutionContextOnAsmTest {
         EDataType phoneType = newEDataTypeBuilder().withName("Phone").withInstanceClassName("java.lang.String").build();
         EDataType booleanType = newEDataTypeBuilder().withName("Boolean").withInstanceClassName("java.lang.Boolean").build();
         EDataType massStoredInKilograms = newEDataTypeBuilder().withName("MassStoredInKilograms").withInstanceClassName("java.lang.Double").build();
-        
+
         //attributes
         EAttribute orderDate = newEAttributeBuilder().withName("orderDate").withEType(timestamp).build();
         EAttribute deliveryFrom = newEAttributeBuilder().withName("deliveryFrom").withEType(time).build();
@@ -155,7 +155,7 @@ public class ExecutionContextOnAsmTest {
         EReference cheapestCategoryProductCategory = newEReferenceBuilder().withName("cheapestCategoryProductCategory")
                 .withDerived(true).withLowerBound(0).withUpperBound(1).build();
 
-        
+
         //classes
         EClass order = newEClassBuilder().withName("Order")
                 .withEStructuralFeatures(orderDate, deliveryFrom, deliveryTo, orderDetails, categories, employeeRef, shipperRef, customerOrder, shipAddress, freight, shipperName).build();
@@ -179,16 +179,16 @@ public class ExecutionContextOnAsmTest {
         EClass supplier = newEClassBuilder().withName("Supplier")
                 .withESuperTypes(company).build();
         EClass territory = newEClassBuilder().withName("Territory").withEStructuralFeatures(shipperTerritory).build();
-        
+
         EClass orderInfo = newEClassBuilder().withName("OrderInfo").withEStructuralFeatures(orderDateAnnotated,items).build();
         EClass orderItem = newEClassBuilder().withName("OrderItem").build();
         EClass productInfo = newEClassBuilder().withName("ProductInfo").build();
         EClass internationalOrderInfo = newEClassBuilder().withName("InternationalOrderInfo").withEStructuralFeatures(shipperNameMapped).build();
-        
+
         EClass __static = newEClassBuilder().withName("__Static").withEStructuralFeatures(totalNumberOfOrders).build();
         EClass unboundServices = newEClassBuilder().withName("__UnboundServices").withEOperations(getAllOrders).build();
         EClass internalAP = newEClassBuilder().withName("InternalAP").withEStructuralFeatures(ordersAssignedToEmployee).build();
-        
+
         //set types of relations
         useEReference(orderDetails).withEType(orderDetail).build();
         useEReference(productRef).withEType(product).build();
@@ -211,7 +211,7 @@ public class ExecutionContextOnAsmTest {
         useEReference(ordersAssignedToEmployee).withEType(order).build();
         useEReference(cheapestCategoryProductCategory).withEType(category).build();
 
-        
+
         //packages
         EPackage demo = newEPackageBuilder().withName("demo").withNsURI("http://blackbelt.hu/judo/northwind/northwind/demo")
                 .withNsPrefix("runtimenorthwindNorthwindDemo").build();
@@ -234,13 +234,13 @@ public class ExecutionContextOnAsmTest {
         EPackage measures = newEPackageBuilder().withName("measures")
                 .withNsURI("http://blackbelt.hu/judo/northwind/demo/measures")
                 .withNsPrefix("runtimenorthwindDemoMeasures").build();
-        
+
         //packages again
         useEPackage(demo).withESubpackages(services,entities,types,measures).build();
         useEPackage(types).withESubpackages(measured).build();
-        
+
         asmModel.addContent(demo);
-        
+
         //annotations
         EAnnotation orderAnnotation = AsmUtils.getExtensionAnnotationByName(order, "entity", true).get();
         orderAnnotation.getDetails().put("value", "true");
@@ -281,7 +281,7 @@ public class ExecutionContextOnAsmTest {
         attributeAnnotation.getDetails().put("value", orderDate.getName());
         EAnnotation itemsAnnotation = AsmUtils.getExtensionAnnotationByName(items, "binding", true).get();
         itemsAnnotation.getDetails().put("value", orderDetails.getName());
-        
+
         EAnnotation annotationOrderInfo = AsmUtils.getExtensionAnnotationByName(orderInfo, "mappedEntityType", true).get();
         annotationOrderInfo.getDetails().put("value", AsmUtils.getClassifierFQName(order));
         EAnnotation annotationOrderItem = AsmUtils.getExtensionAnnotationByName(orderItem, "mappedEntityType", true).get();
@@ -298,31 +298,31 @@ public class ExecutionContextOnAsmTest {
         shipperNameMappedConstraintAnnotation.getDetails().put("maxLength", "255");
         EAnnotation operationAnnotation = AsmUtils.getExtensionAnnotationByName(getAllOrders, "exposedBy", true).get();
         operationAnnotation.getDetails().put("value", AsmUtils.getClassifierFQName(internalAP));
-        
+
         EAnnotation getterAnnotationForOrdersAssignedToEmployee = AsmUtils.getExtensionAnnotationByName(ordersAssignedToEmployee, "expression", true).get();
         getterAnnotationForOrdersAssignedToEmployee.getDetails().put("getter", "demo::entities::Employee.orders");
         getterAnnotationForOrdersAssignedToEmployee.getDetails().put("getter.dialect", "JQL");
-        
+
         EAnnotation getterAnnotationForShipperName = AsmUtils.getExtensionAnnotationByName(shipperName, "expression", true).get();
         getterAnnotationForShipperName.getDetails().put("getter", "self.shipper.companyName");
         getterAnnotationForShipperName.getDetails().put("getter.dialect", "JQL");
-        
+
         EAnnotation getterAnnotationForCategories = AsmUtils.getExtensionAnnotationByName(categories, "expression", true).get();
         getterAnnotationForCategories.getDetails().put("getter", "self.orderDetails.product.category");
         getterAnnotationForCategories.getDetails().put("getter.dialect", "JQL");
-        
+
         EAnnotation getterAnnotationForProductName = AsmUtils.getExtensionAnnotationByName(productNameForOrderDetail, "expression", true).get();
         getterAnnotationForProductName.getDetails().put("getter", "self.product.productName");
         getterAnnotationForProductName.getDetails().put("getter.dialect", "JQL");
-        
+
         EAnnotation getterAnnotationForCheapestCategoryProduct = AsmUtils.getExtensionAnnotationByName(cheapestCategoryProductCategory, "expression", true).get();
         getterAnnotationForCheapestCategoryProduct.getDetails().put("getter", "self.products!head(p | p.unitPrice).category");
         getterAnnotationForCheapestCategoryProduct.getDetails().put("getter.dialect", "JQL");
 
     }
-    
+
     protected void populateMeasureModel() {
-        
+
         BaseMeasure time = newBaseMeasureBuilder().withName("Time").withNamespace("demo::measures").withUnits(
                 newDurationUnitBuilder().withName("nanosecond").withSymbol("ns").withRateDividend(new BigDecimal(1.0)).withRateDivisor(new BigDecimal(1.0E+9)).withType(DurationType.NANOSECOND).build(),
                 newDurationUnitBuilder().withName("microsecond").withSymbol("μs").withRateDividend(new BigDecimal(1.0)).withRateDivisor(new BigDecimal(1000000.0)).withType(DurationType.MICROSECOND).build(),
@@ -334,12 +334,12 @@ public class ExecutionContextOnAsmTest {
                 newDurationUnitBuilder().withName("week").withSymbol("").withRateDividend(new BigDecimal(604800.0)).withRateDivisor(new BigDecimal(1.0)).withType(DurationType.WEEK).build(),
                 newDurationUnitBuilder().withName("halfDay").withSymbol("").withRateDividend(new BigDecimal(43200.0)).withRateDivisor(new BigDecimal(1.0)).build())
             .build();
-        
+
         BaseMeasure monthBasedTime = newBaseMeasureBuilder().withName("MonthBasedTime").withNamespace("demo::measures").withUnits(
                 newDurationUnitBuilder().withName("month").withRateDividend(new BigDecimal(1.0)).withRateDivisor(new BigDecimal(1.0)).withType(DurationType.MONTH).build(),
                 newDurationUnitBuilder().withName("year").withRateDividend(new BigDecimal(12.0)).withRateDivisor(new BigDecimal(1.0)).withType(DurationType.YEAR).build())
             .build();
-        
+
         BaseMeasure mass = newBaseMeasureBuilder().withName("Mass").withNamespace("demo::measures").withUnits(
                 newUnitBuilder().withName("milligram").withSymbol("mg").withRateDividend(new BigDecimal(0.0000010)).withRateDivisor(new BigDecimal(1.0)).build(),
                 newUnitBuilder().withName("gram").withSymbol("g").withRateDividend(new BigDecimal(0.001)).withRateDivisor(new BigDecimal(1.0)).build(),
@@ -348,7 +348,7 @@ public class ExecutionContextOnAsmTest {
                 newUnitBuilder().withName("quintal").withSymbol("q").withRateDividend(new BigDecimal(100.0)).withRateDivisor(new BigDecimal(1.0)).build(),
                 newUnitBuilder().withName("tonne").withSymbol("t").withRateDividend(new BigDecimal(1000.0)).withRateDivisor(new BigDecimal(1.0)).build())
             .build();
-        
+
         BaseMeasure length = newBaseMeasureBuilder().withName("Length").withNamespace("demo::measures").withUnits(
                 newUnitBuilder().withName("nanometre").withSymbol("nm").withRateDividend(new BigDecimal(1.0E-9)).withRateDivisor(new BigDecimal(1.0)).build(),
                 newUnitBuilder().withName("micrometre").withSymbol("μm").withRateDividend(new BigDecimal(0.0000010)).withRateDivisor(new BigDecimal(1.0)).build(),
@@ -361,14 +361,14 @@ public class ExecutionContextOnAsmTest {
                 newUnitBuilder().withName("foot").withSymbol("ft").withRateDividend(new BigDecimal(0.3048)).withRateDivisor(new BigDecimal(1.0)).build(),
                 newUnitBuilder().withName("mile").withSymbol("mi").withRateDividend(new BigDecimal(1609.344)).withRateDivisor(new BigDecimal(1.0)).build())
             .build();
-        
+
         DerivedMeasure velocity = newDerivedMeasureBuilder().withName("Velocity").withNamespace("demo::measures").withUnits(
                 newUnitBuilder().withName("kilometrePerHour").withSymbol("km/h").withRateDividend(new BigDecimal(1.0)).withRateDivisor(new BigDecimal(3.6)).build(),
                 newUnitBuilder().withName("metrePerSecond").withSymbol("m/s").withRateDividend(new BigDecimal(1.0)).withRateDivisor(new BigDecimal(1.0)).build())
                 .withTerms(newBaseMeasureTermBuilder().withExponent(1).withBaseMeasure(length).build())
                 .withTerms(newBaseMeasureTermBuilder().withExponent(-1).withBaseMeasure(time).build())
             .build();
-        
+
         DerivedMeasure area = newDerivedMeasureBuilder().withName("Area").withNamespace("demo::measures").withUnits(
                 newUnitBuilder().withName("squareMillimetre").withSymbol("mm²").withRateDividend(new BigDecimal(0.0000010)).withRateDivisor(new BigDecimal(3.6)).build(),
                 newUnitBuilder().withName("squareCentimetre").withSymbol("cm²").withRateDividend(new BigDecimal(0.00010)).withRateDivisor(new BigDecimal(1.0)).build(),
@@ -378,14 +378,14 @@ public class ExecutionContextOnAsmTest {
                 newUnitBuilder().withName("squareKilometre").withSymbol("km²").withRateDividend(new BigDecimal(1000000.0)).withRateDivisor(new BigDecimal(1.0)).build())
                 .withTerms(newBaseMeasureTermBuilder().withExponent(2).withBaseMeasure(length).build())
             .build();
-        
+
         DerivedMeasure force = newDerivedMeasureBuilder().withName("Force").withNamespace("demo::measures").withUnits(
                 newUnitBuilder().withName("newton").withSymbol("N").withRateDividend(new BigDecimal(1.0)).withRateDivisor(new BigDecimal(1.0)).build())
                 .withTerms(newBaseMeasureTermBuilder().withExponent(-2).withBaseMeasure(time).build())
                 .withTerms(newBaseMeasureTermBuilder().withExponent(1).withBaseMeasure(mass).build())
                 .withTerms(newBaseMeasureTermBuilder().withExponent(1).withBaseMeasure(length).build())
             .build();
-        
+
         measureModel.addContent(time);
         measureModel.addContent(mass);
         measureModel.addContent(length);
@@ -394,7 +394,7 @@ public class ExecutionContextOnAsmTest {
         measureModel.addContent(force);
         measureModel.addContent(monthBasedTime);
     }
-    
+
     private void runEpsilonOnMeasure() throws Exception {
         try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
             MeasureEpsilonValidator.validateMeasure(bufferedLog,
@@ -409,7 +409,7 @@ public class ExecutionContextOnAsmTest {
             throw ex;
         }
     }
-    
+
     private void runEpsilonOnAsm() throws Exception {
         try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
             AsmEpsilonValidator.validateAsm(bufferedLog,
