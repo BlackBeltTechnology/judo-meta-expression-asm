@@ -91,7 +91,7 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20230325_040808_86e8c41d_develop</judo-meta-expression-version>
+		<judo-meta-expression-version>1.0.5.20230328_193008_a5c01757_feature_JNG_4662_Fix_enum_equality_check_in_ternary</judo-meta-expression-version>
         <judo-meta-asm-version>1.1.4.20230310_041340_c5dd0888_develop</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.4.20230324_114617_9ab032bf_develop</judo-meta-jql-version>
         <judo-meta-measure-version>1.0.2.20230310_041354_f9e5d334_develop</judo-meta-measure-version>
