@@ -37,6 +37,7 @@ import static hu.blackbelt.judo.meta.expression.util.builder.ExpressionBuilders.
 import java.math.BigInteger;
 import java.time.OffsetDateTime;
 
+import hu.blackbelt.judo.meta.expression.operator.*;
 import org.eclipse.emf.common.util.URI;
 
 import java.math.BigDecimal;
@@ -58,13 +59,6 @@ import hu.blackbelt.judo.meta.expression.numeric.DecimalSwitchExpression;
 import hu.blackbelt.judo.meta.expression.numeric.IntegerAttribute;
 import hu.blackbelt.judo.meta.expression.object.ContainerExpression;
 import hu.blackbelt.judo.meta.expression.object.ObjectNavigationExpression;
-import hu.blackbelt.judo.meta.expression.operator.DecimalAggregator;
-import hu.blackbelt.judo.meta.expression.operator.DecimalOperator;
-import hu.blackbelt.judo.meta.expression.operator.LogicalOperator;
-import hu.blackbelt.judo.meta.expression.operator.NumericComparator;
-import hu.blackbelt.judo.meta.expression.operator.ObjectComparator;
-import hu.blackbelt.judo.meta.expression.operator.StringComparator;
-import hu.blackbelt.judo.meta.expression.operator.TemporalOperator;
 import hu.blackbelt.judo.meta.expression.string.StringAttribute;
 import hu.blackbelt.judo.meta.expression.support.ExpressionModelResourceSupport;
 import hu.blackbelt.judo.meta.expression.temporal.TimestampAdditionExpression;
@@ -187,7 +181,7 @@ public class ExpressionModelForTest {
                                                 .build())
                                         .withPattern(newStringConstantBuilder().withValue("11%").build())
                                         .build())
-                                .withRight(newEnumerationComparisonBuilder().withOperator(ObjectComparator.EQUAL)
+                                .withRight(newEnumerationComparisonBuilder().withOperator(EnumerationComparator.EQUAL)
                                         .withLeft(newEnumerationAttributeBuilder().withAttributeName("country")
                                                 .withObjectExpression(newCastObjectBuilder().withElementName(intAddress)
                                                         .withObjectExpression(newObjectSelectorExpressionBuilder()
