@@ -6,7 +6,7 @@ Bundle-Version: 1.0.5.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: BlackBelt Technology
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: hu.blackbelt.judo.meta.expression.builder.jql.asm
 Import-Package: hu.blackbelt.judo.meta.asm.runtime,
