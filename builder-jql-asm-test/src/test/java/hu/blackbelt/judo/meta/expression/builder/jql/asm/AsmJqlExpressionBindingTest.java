@@ -21,7 +21,7 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  */
 
 import com.google.common.collect.ImmutableList;
-import hu.blackbelt.epsilon.runtime.execution.api.Log;
+import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.Expression;
 import hu.blackbelt.judo.meta.expression.builder.jql.CreateExpressionArguments;
@@ -113,7 +113,7 @@ public class AsmJqlExpressionBindingTest extends ExecutionContextOnAsmTest {
                 .expressionModelResourceSupport(expressionModelResourceSupport)
                 .name(asmModel.getName())
                 .build();
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(
                     bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI(),
                     ImmutableList.of(
@@ -142,7 +142,7 @@ public class AsmJqlExpressionBindingTest extends ExecutionContextOnAsmTest {
                 .expressionModelResourceSupport(expressionModelResourceSupport)
                 .name(asmModel.getName())
                 .build();
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(
                     bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI(),
                     ImmutableList.of(
