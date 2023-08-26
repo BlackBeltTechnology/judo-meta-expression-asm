@@ -67,8 +67,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.5.1.20230825_113533_d0c91d68_feature_JNG_5144_ReplaceLogger</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.5.4.20230825_131652_0e84510c_feature_JNG_5144_ReplaceLogger</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.5.1.20230826_185131_a85b1c29_feature_JNG_5144_ReplaceLogger</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.5.4.20230826_191153_3c485438_feature_JNG_5144_ReplaceLogger</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -92,10 +92,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20230825_183934_753e97d5_feature_JNG_5144_ReplaceLogger</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20230825_132003_a60831e8_feature_JNG_5144_ReplaceLogger</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20230824_183611_e8ccedad_feature_JNG_5144_ReplaceLogger</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20230825_132045_ce8ff93b_feature_JNG_5144_ReplaceLogger</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20230826_191752_e2e22111_feature_JNG_5144_ReplaceLogger</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20230826_191521_e951376f_feature_JNG_5144_ReplaceLogger</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20230826_184322_8fd39501_feature_JNG_5144_ReplaceLogger</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20230826_191548_1a2584b1_feature_JNG_5144_ReplaceLogger</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
