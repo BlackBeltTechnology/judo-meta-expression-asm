@@ -20,10 +20,8 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.api.Log;
 import hu.blackbelt.epsilon.runtime.execution.exceptions.EvlScriptExecutionException;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
-import hu.blackbelt.epsilon.runtime.execution.impl.Slf4jLog;
 import hu.blackbelt.judo.meta.asm.runtime.*;
 import hu.blackbelt.judo.meta.expression.adapters.asm.AsmModelAdapter;
 import hu.blackbelt.judo.meta.measure.*;
@@ -396,7 +394,7 @@ public class ExecutionContextOnAsmTest {
     }
 
     private void runEpsilonOnMeasure() throws Exception {
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             MeasureEpsilonValidator.validateMeasure(bufferedLog,
                     measureModel,
                     MeasureEpsilonValidator.calculateMeasureValidationScriptURI(),
@@ -411,7 +409,7 @@ public class ExecutionContextOnAsmTest {
     }
 
     private void runEpsilonOnAsm() throws Exception {
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             AsmEpsilonValidator.validateAsm(bufferedLog,
                     asmModel,
                     AsmEpsilonValidator.calculateAsmValidationScriptURI(),
