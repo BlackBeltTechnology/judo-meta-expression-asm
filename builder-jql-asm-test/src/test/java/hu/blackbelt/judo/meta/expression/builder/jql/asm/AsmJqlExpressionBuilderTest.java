@@ -20,7 +20,7 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.api.Log;
+import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.asm.runtime.AsmUtils;
 import hu.blackbelt.judo.meta.expression.*;
@@ -140,7 +140,7 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
                 .name(asmModel.getName())
                 .build();
 
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
         }
         modelAdapter = null;
