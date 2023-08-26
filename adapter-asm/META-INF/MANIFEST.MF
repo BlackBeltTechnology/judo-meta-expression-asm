@@ -30,7 +30,7 @@ Import-Package: hu.blackbelt.epsilon.runtime.execution,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.util,
  org.eclipse.epsilon.common.util,
- org.slf4j;version="1.7.2"
+ org.slf4j;version="[1.6,3)"
 Export-Package: hu.blackbelt.judo.meta.expression.adapters.asm
 Require-Bundle: org.eclipse.emf.ecore,
  org.eclipse.emf.common

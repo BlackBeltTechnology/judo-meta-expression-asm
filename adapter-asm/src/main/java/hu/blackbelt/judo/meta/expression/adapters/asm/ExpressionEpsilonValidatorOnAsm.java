@@ -21,7 +21,7 @@ package hu.blackbelt.judo.meta.expression.adapters.asm;
  */
 
 import hu.blackbelt.epsilon.runtime.execution.ExecutionContext;
-import hu.blackbelt.epsilon.runtime.execution.api.Log;
+import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.exceptions.ScriptExecutionException;
 import hu.blackbelt.judo.meta.asm.runtime.AsmModel;
 import hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator;
@@ -44,12 +44,12 @@ import static java.util.Collections.emptyList;
 
 public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator {
 
-    public static void validateExpressionOnAsm(Log log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot)
+    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot)
             throws ScriptExecutionException, URISyntaxException {
         validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, scriptRoot, emptyList(), emptyList());
     }
 
-    public static void validateExpressionOnAsm(Log log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
+    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
                                    Collection<String> expectedErrors, Collection<String> expectedWarnings)
             throws ScriptExecutionException, URISyntaxException {
 
