@@ -20,7 +20,7 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.api.Log;
+import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.builder.jql.JqlExtractor;
 import hu.blackbelt.judo.meta.expression.collection.CollectionNavigationFromCollectionExpression;
@@ -91,7 +91,7 @@ public class AsmJqlExtractorTest extends ExecutionContextOnAsmTest {
 
           log.info(expressionModel.getDiagnosticsAsString());
         assertTrue(expressionModel.isValid());
-        try (Log bufferedLog = new BufferedSlf4jLogger(log)) {
+        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
         }
 
