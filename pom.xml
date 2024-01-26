@@ -94,7 +94,7 @@
         <pax-exam-version>4.13.4</pax-exam-version>
 
 		<judo-meta-expression-version>1.0.5.20231107_042129_0d5eab73_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20231107_041242_3043885c_develop</judo-meta-asm-version>
+        <judo-meta-asm-version>1.1.4.20240126_073259_2b2d42a1_develop</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.4.20231107_041307_10280029_develop</judo-meta-jql-version>
         <judo-meta-measure-version>1.0.2.20231107_041238_36e3764d_develop</judo-meta-measure-version>
 
