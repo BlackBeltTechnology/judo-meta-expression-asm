@@ -68,8 +68,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.5.1.20230914_115155_8ab2f00c_develop</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.5.4.20230914_115404_bc7b4442_develop</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.5.1.20240410_091338_0f28571b_develop</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.5.4.20240410_091544_24b65386_develop</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -77,9 +77,9 @@
         <maven.compiler.target>17</maven.compiler.target>
         <tycho-version>4.0.7</tycho-version>
 
-        <emf-genmodel-generator-version>1.1.1.20231106_151954_7fd1b3f5_develop</emf-genmodel-generator-version>
-        <judo-genmodel-generator-version>1.1.2.20231107_041037_4b4570ca_develop</judo-genmodel-generator-version>
-        <judo-epp-common-version>4.29.0.20230922_122205_4ad6b77f_develop</judo-epp-common-version>
+        <emf-genmodel-generator-version>1.1.1.20240410_065331_3400dfa6_develop</emf-genmodel-generator-version>
+        <judo-genmodel-generator-version>1.1.2.20240410_075618_a6090f79_develop</judo-genmodel-generator-version>
+        <judo-epp-common-version>4.29.0.20240410_065423_a90724bb_develop</judo-epp-common-version>
 
         <xtext-version>2.29.0</xtext-version>
         <emf-mwe2-launch-version>2.13.0</emf-mwe2-launch-version>
@@ -93,10 +93,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.4</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20240208_181827_dd8b9709_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20240321_212235_eed2dd5c_develop</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20231107_041307_10280029_develop</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20231107_041238_36e3764d_develop</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20240410_092154_dd47ca0c_develop</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20240410_091913_a09b0984_develop</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20240410_091349_e488ea5d_develop</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20240410_091934_a60868db_develop</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
