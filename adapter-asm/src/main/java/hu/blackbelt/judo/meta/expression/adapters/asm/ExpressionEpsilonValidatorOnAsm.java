@@ -90,6 +90,8 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
             // Transformation script
             executionContext
                     .executeProgram(evlExecutionContextBuilder().source(UriUtil.resolve("expression.evl", scriptRoot))
+                            // TODO: https://github.com/eclipse/epsilon/issues/133
+                            .parallel(false)
                             .expectedErrors(expectedErrors).expectedWarnings(expectedWarnings).build());
 
         } finally {
