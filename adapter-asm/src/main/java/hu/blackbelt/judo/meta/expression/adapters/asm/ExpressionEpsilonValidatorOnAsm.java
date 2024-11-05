@@ -67,18 +67,21 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
                                 .name("ASM")
                                 .resource(asmModel.getResource())
                                 .validateModel(false)
+                                .useCache(true)
                                 .build(),
                         wrappedEmfModelContextBuilder()
                                 .log(log)
                                 .name("MEASURES")
                                 .resource(measureModel.getResource())
                                 .validateModel(false)
+                                .useCache(true)
                                 .build(),
                         wrappedEmfModelContextBuilder()
                                 .log(log)
                                 .name("EXPR")
                                 .resource(expressionModel.getResource())
                                 .validateModel(false)
+                                .useCache(true)
                                 .build()))
                 .injectContexts(injections)
                 .build();
