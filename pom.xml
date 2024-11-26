@@ -68,35 +68,37 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.5.1.20240414_020123_4ed0f7e3_develop</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.5.4.20240414_042100_3279622b_develop</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.5.1.20241126_215218_2124427f_feature_JNG_5995_UpdateEclipse</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.5.4.20241126_215432_dce4b39a_feature_JNG_5995_UpdateEclipse</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <tycho-version>4.0.7</tycho-version>
+        <tycho-version>4.0.9</tycho-version>
 
         <emf-genmodel-generator-version>1.1.1.20240410_065331_3400dfa6_develop</emf-genmodel-generator-version>
         <judo-genmodel-generator-version>1.1.2.20240410_075618_a6090f79_develop</judo-genmodel-generator-version>
-        <judo-epp-common-version>4.29.0.20240410_065423_a90724bb_develop</judo-epp-common-version>
+        <judo-epp-common-version>4.33.0.20241102_103326_c584a408_feature_JNG_5995_UpdateEclipse</judo-epp-common-version>
 
         <xtext-version>2.29.0</xtext-version>
         <emf-mwe2-launch-version>2.13.0</emf-mwe2-launch-version>
-        <slf4j-version>2.0.7</slf4j-version>
-        <surefire-version>3.0.0-M7</surefire-version>
+        <slf4j-version>2.0.16</slf4j-version>
+        <surefire-version>3.5.1</surefire-version>
         <!--suppress UnresolvedMavenProperty -->
         <logback-test-config>${maven.multiModuleProjectDirectory}/logback-test.xml</logback-test-config>
+        <logback-version>1.5.12</logback-version>
+        <lombok-version>1.18.34</lombok-version>
 
         <!-- Pax exam dependencies -->
         <karaf-version>4.4.5</karaf-version>
         <cxf-version>3.4.4</cxf-version>
-        <pax-exam-version>4.13.4</pax-exam-version>
+        <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20240414_043040_426cab39_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20240414_042403_a93471de_develop</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20240410_091349_e488ea5d_develop</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20240414_042420_a2e6a9e7_develop</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20241126_220238_13274e01_feature_JNG_5995_UpdateEclipse</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20241126_220023_bc4126f5_feature_JNG_5995_UpdateEclipse</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20241126_215231_4a7cf136_feature_JNG_5995_UpdateEclipse</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20241126_215945_a8cc232f_feature_JNG_5995_UpdateEclipse</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
@@ -110,7 +112,7 @@
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.language>java</sonar.language>
         <sonar.java.source>${java.version}</sonar.java.source>
-        <jacoco.version>0.8.8</jacoco.version>
+        <jacoco.version>0.8.12</jacoco.version>
 
     </properties>
 
@@ -721,7 +723,7 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.4.11</version>
+                <version>${logback-version}</version>
             </dependency>
 
             <dependency>
@@ -768,7 +770,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
+            <version>${lombok-version}</version>
         </dependency>
 
         <dependency>
