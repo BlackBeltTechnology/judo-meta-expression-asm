@@ -68,8 +68,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.5.1.20241126_013841_e14011dd_feature_JNG_5995_UpdateEclipse</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.5.4.20241126_014059_3ee55f13_feature_JNG_5995_UpdateEclipse</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.5.1.20241126_215218_2124427f_feature_JNG_5995_UpdateEclipse</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.5.4.20241126_215432_dce4b39a_feature_JNG_5995_UpdateEclipse</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -95,10 +95,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20241126_015206_3381a2ad_feature_JNG_5995_UpdateEclipse</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20241126_014654_ff7f91a6_feature_JNG_5995_UpdateEclipse</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20241126_013900_c599a469_feature_JNG_5995_UpdateEclipse</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20241126_014704_04debade_feature_JNG_5995_UpdateEclipse</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20241126_220238_13274e01_feature_JNG_5995_UpdateEclipse</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20241126_220023_bc4126f5_feature_JNG_5995_UpdateEclipse</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20241126_215231_4a7cf136_feature_JNG_5995_UpdateEclipse</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20241126_215945_a8cc232f_feature_JNG_5995_UpdateEclipse</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
