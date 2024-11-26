@@ -52,7 +52,7 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
     public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
                                                Collection<String> expectedErrors, Collection<String> expectedWarnings)
             throws ScriptExecutionException, URISyntaxException {
-        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, scriptRoot, expectedErrors, expectedWarnings, false);
+        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, scriptRoot, expectedErrors, expectedWarnings, true);
     }
 
     public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
