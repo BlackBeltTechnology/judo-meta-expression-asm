@@ -50,7 +50,13 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
     }
 
     public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
-                                   Collection<String> expectedErrors, Collection<String> expectedWarnings)
+                                               Collection<String> expectedErrors, Collection<String> expectedWarnings)
+            throws ScriptExecutionException, URISyntaxException {
+        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, scriptRoot, expectedErrors, expectedWarnings, true);
+    }
+
+    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
+                                   Collection<String> expectedErrors, Collection<String> expectedWarnings, Boolean useCache)
             throws ScriptExecutionException, URISyntaxException {
 
         final Map<String, Object> injections = new HashMap<>();
@@ -67,18 +73,21 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
                                 .name("ASM")
                                 .resource(asmModel.getResource())
                                 .validateModel(false)
+                                .useCache(useCache)
                                 .build(),
                         wrappedEmfModelContextBuilder()
                                 .log(log)
                                 .name("MEASURES")
                                 .resource(measureModel.getResource())
                                 .validateModel(false)
+                                .useCache(useCache)
                                 .build(),
                         wrappedEmfModelContextBuilder()
                                 .log(log)
                                 .name("EXPR")
                                 .resource(expressionModel.getResource())
                                 .validateModel(false)
+                                .useCache(useCache)
                                 .build()))
                 .injectContexts(injections)
                 .build();
@@ -90,6 +99,7 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
             // Transformation script
             executionContext
                     .executeProgram(evlExecutionContextBuilder().source(UriUtil.resolve("expression.evl", scriptRoot))
+                            .parallel(true)
                             .expectedErrors(expectedErrors).expectedWarnings(expectedWarnings).build());
 
         } finally {
