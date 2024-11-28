@@ -68,8 +68,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>1.5.1.20241128_024746_ef61b96f_develop</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>1.5.4.20241128_025212_60b0c8e4_develop</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>1.5.1.20241128_093741_e2eaf095_develop</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>1.5.4.20241128_095502_f9006cb0_develop</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -95,10 +95,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20241128_030330_a4e1de47_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20241128_025801_240729e7_develop</judo-meta-asm-version>
+		<judo-meta-expression-version>1.0.5.20241128_101229_e3fea1ba_develop</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20241128_100712_8686be5b_develop</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.4.20241127_233906_fda2e24e_develop</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20241128_025805_a4868c81_develop</judo-meta-measure-version>
+        <judo-meta-measure-version>1.0.2.20241128_100612_170f81d9_develop</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
