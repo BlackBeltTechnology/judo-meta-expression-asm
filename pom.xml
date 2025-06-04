@@ -95,10 +95,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20250604_013133_bff7d9b3_feature_JNG_6310_UpdateEpsilon</judo-meta-expression-version>
+		<judo-meta-expression-version>1.0.5.20250604_081333_c630711a_feature_JNG_6310_UpdateEpsilon</judo-meta-expression-version>
         <judo-meta-asm-version>1.1.4.20250604_010838_37156b2f_feature_JNG_6310_UpdateEpsilon</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.4.20250604_010324_c0fd26d0_feature_JNG_6310_UpdateEpsilon</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20250604_010910_49562b37_feature_JNG_6310_UpdateEpsilon</judo-meta-measure-version>
+        <judo-meta-measure-version>1.0.2.20250604_075411_1045cb6c_feature_JNG_6310_UpdateEpsilon</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
