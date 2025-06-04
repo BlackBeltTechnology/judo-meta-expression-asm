@@ -77,8 +77,8 @@
         <maven.compiler.target>21</maven.compiler.target>
         <tycho-version>4.0.13</tycho-version>
 
-        <emf-genmodel-generator-version>1.1.1.20250604_004501_3882b914_feature_JNG_6310_UpdateEpsilon</emf-genmodel-generator-version>
-        <judo-genmodel-generator-version>1.1.2.20250604_010106_738f271c_feature_JNG_6310_UpdateEpsilon</judo-genmodel-generator-version>
+        <emf-genmodel-generator-version>1.1.1.20250604_121429_d7dbb485_feature_JNG_6310_UpdateEpsilon</emf-genmodel-generator-version>
+        <judo-genmodel-generator-version>1.1.2.20250604_124344_281ddd50_feature_JNG_6310_UpdateEpsilon</judo-genmodel-generator-version>
         <judo-epp-common-version>4.35.0.20250602_084007_7078e337_feature_JNG_6310_UpdateEpsilon</judo-epp-common-version>
 
         <xtext-version>2.39.0</xtext-version>
@@ -95,10 +95,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20250604_122743_444b6c8f_feature_JNG_6310_UpdateEpsilon</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20250604_122322_fb1ed7cc_feature_JNG_6310_UpdateEpsilon</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20250604_010324_c0fd26d0_feature_JNG_6310_UpdateEpsilon</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20250604_122314_329f7951_feature_JNG_6310_UpdateEpsilon</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20250604_124912_e331eaf4_feature_JNG_6310_UpdateEpsilon</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20250604_124537_4f9b0b09_feature_JNG_6310_UpdateEpsilon</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20250604_124601_c0e586a3_feature_JNG_6310_UpdateEpsilon</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20250604_124622_fab5952e_feature_JNG_6310_UpdateEpsilon</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
