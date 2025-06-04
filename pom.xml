@@ -68,8 +68,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>2.8.0.20250601_204925_56fd7ee5_feature_JNG_6310_UpdateEpsilon</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>2.8.0.20250602_084050_dbf00519_feature_JNG_6310_UpdateEpsilon</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>2.8.0.20250604_010048_f8a9a95a_feature_JNG_6310_UpdateEpsilon</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>2.8.0.20250604_010329_52e113a0_feature_JNG_6310_UpdateEpsilon</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -77,8 +77,8 @@
         <maven.compiler.target>21</maven.compiler.target>
         <tycho-version>4.0.13</tycho-version>
 
-        <emf-genmodel-generator-version>1.1.1.20250601_200006_4860bd0d_feature_JNG_6310_UpdateEpsilon</emf-genmodel-generator-version>
-        <judo-genmodel-generator-version>1.1.2.20250601_214726_59bc6075_feature_JNG_6310_UpdateEpsilon</judo-genmodel-generator-version>
+        <emf-genmodel-generator-version>1.1.1.20250604_004501_3882b914_feature_JNG_6310_UpdateEpsilon</emf-genmodel-generator-version>
+        <judo-genmodel-generator-version>1.1.2.20250604_010106_738f271c_feature_JNG_6310_UpdateEpsilon</judo-genmodel-generator-version>
         <judo-epp-common-version>4.35.0.20250602_084007_7078e337_feature_JNG_6310_UpdateEpsilon</judo-epp-common-version>
 
         <xtext-version>2.39.0</xtext-version>
@@ -95,10 +95,10 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20250602_091457_09e1d468_feature_JNG_6310_UpdateEpsilon</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20250602_090702_148f6b2e_feature_JNG_6310_UpdateEpsilon</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20250602_090807_7bc1d933_feature_JNG_6310_UpdateEpsilon</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20250602_090652_b12c43f7_feature_JNG_6310_UpdateEpsilon</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20250604_013133_bff7d9b3_feature_JNG_6310_UpdateEpsilon</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20250604_010838_37156b2f_feature_JNG_6310_UpdateEpsilon</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20250604_010324_c0fd26d0_feature_JNG_6310_UpdateEpsilon</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20250604_010910_49562b37_feature_JNG_6310_UpdateEpsilon</judo-meta-measure-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
@@ -827,7 +827,7 @@
                     <plugin>
                         <groupId>org.simplify4u.plugins</groupId>
                         <artifactId>sign-maven-plugin</artifactId>
-                        <version>1.0.1</version>
+                        <version>1.1.0</version>
                         <executions>
                             <execution>
                                 <goals>
