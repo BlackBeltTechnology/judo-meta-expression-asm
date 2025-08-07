@@ -9,11 +9,11 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Automatic-Module-Name: hu.blackbelt.judo.meta.expression.model.adapter.asm
-Import-Package: hu.blackbelt.epsilon.runtime.execution,
- hu.blackbelt.epsilon.runtime.execution.api,
- hu.blackbelt.epsilon.runtime.execution.contexts,
- hu.blackbelt.epsilon.runtime.execution.exceptions,
- hu.blackbelt.epsilon.runtime.execution.model.emf,
+Import-Package: hu.blackbelt.epsilon.runtime.execution;resolution:=optional,
+ hu.blackbelt.epsilon.runtime.execution.api;resolution:=optional,
+ hu.blackbelt.epsilon.runtime.execution.contexts;resolution:=optional,
+ hu.blackbelt.epsilon.runtime.execution.exceptions;resolution:=optional,
+ hu.blackbelt.epsilon.runtime.execution.model.emf;resolution:=optional,
  hu.blackbelt.judo.meta.asm.runtime,
  hu.blackbelt.judo.meta.expression,
  hu.blackbelt.judo.meta.expression.adapters,
@@ -29,7 +29,7 @@ Import-Package: hu.blackbelt.epsilon.runtime.execution,
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.util,
- org.eclipse.epsilon.common.util,
+ org.eclipse.epsilon.common.util;resolution:=optional,
  org.slf4j;version="[1.6,3)"
 Export-Package: hu.blackbelt.judo.meta.expression.adapters.asm
 Require-Bundle: org.eclipse.emf.ecore,
