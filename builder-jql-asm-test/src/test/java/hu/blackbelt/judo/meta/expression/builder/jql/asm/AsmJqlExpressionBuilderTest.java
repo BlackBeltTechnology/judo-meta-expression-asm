@@ -20,7 +20,6 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * #L%
  */
 
-import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.asm.runtime.AsmUtils;
 import hu.blackbelt.judo.meta.expression.*;
@@ -29,7 +28,6 @@ import hu.blackbelt.judo.meta.expression.collection.*;
 import hu.blackbelt.judo.meta.expression.constant.*;
 import hu.blackbelt.judo.meta.expression.numeric.DecimalSwitchExpression;
 import hu.blackbelt.judo.meta.expression.object.*;
-import hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator;
 import hu.blackbelt.judo.meta.expression.runtime.ExpressionModel;
 import hu.blackbelt.judo.meta.expression.support.ExpressionModelResourceSupport;
 import hu.blackbelt.judo.meta.expression.temporal.TimeDifferenceExpression;
@@ -49,11 +47,10 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.stream.Stream;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionEpsilonValidatorOnAsm.validateExpressionOnAsm;
+import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.builder.jql.JqlExpressionBuilder.BindingType.ATTRIBUTE;
 import static hu.blackbelt.judo.meta.expression.builder.jql.JqlExpressionBuilder.BindingType.RELATION;
 import static hu.blackbelt.judo.meta.expression.builder.jql.expression.JqlNavigationFeatureTransformer.INVALID_ATTRIBUTE_SELECTOR;
-import static hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator.calculateExpressionValidationScriptURI;
 import static org.eclipse.emf.ecore.util.builder.EcoreBuilders.*;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -141,7 +138,7 @@ public class AsmJqlExpressionBuilderTest extends ExecutionContextOnAsmTest {
                 .build();
 
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
-            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
+            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel);
         }
         modelAdapter = null;
         asmUtils = null;

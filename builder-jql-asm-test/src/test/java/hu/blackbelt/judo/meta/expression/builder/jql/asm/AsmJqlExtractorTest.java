@@ -20,7 +20,6 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  * #L%
  */
 
-import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.builder.jql.JqlExtractor;
 import hu.blackbelt.judo.meta.expression.collection.CollectionNavigationFromCollectionExpression;
@@ -37,8 +36,7 @@ import org.junit.jupiter.api.*;
 import java.io.File;
 import java.util.Optional;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionEpsilonValidatorOnAsm.validateExpressionOnAsm;
-import static hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator.calculateExpressionValidationScriptURI;
+import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.support.ExpressionModelResourceSupport.SaveArguments.expressionSaveArgumentsBuilder;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -92,7 +90,7 @@ public class AsmJqlExtractorTest extends ExecutionContextOnAsmTest {
           log.info(expressionModel.getDiagnosticsAsString());
         assertTrue(expressionModel.isValid());
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
-            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
+            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel);
         }
 
         expressionUtils = new ExpressionUtils(expressionResourceSet);

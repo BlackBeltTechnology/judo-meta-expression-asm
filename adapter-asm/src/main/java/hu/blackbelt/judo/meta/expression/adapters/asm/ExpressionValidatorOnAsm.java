@@ -20,45 +20,53 @@ package hu.blackbelt.judo.meta.expression.adapters.asm;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.ExecutionContext;
+import hu.blackbelt.judo.meta.expression.runtime.ExpressionValidationException;
+import hu.blackbelt.judo.meta.expression.runtime.ExpressionValidator;
 import org.slf4j.Logger;
-import hu.blackbelt.epsilon.runtime.execution.exceptions.ScriptExecutionException;
 import hu.blackbelt.judo.meta.asm.runtime.AsmModel;
-import hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator;
-import hu.blackbelt.judo.meta.expression.runtime.ExpressionEvaluator;
 import hu.blackbelt.judo.meta.expression.runtime.ExpressionModel;
 import hu.blackbelt.judo.meta.measure.runtime.MeasureModel;
-import org.eclipse.epsilon.common.util.UriUtil;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
-import static hu.blackbelt.epsilon.runtime.execution.ExecutionContext.executionContextBuilder;
-import static hu.blackbelt.epsilon.runtime.execution.contexts.EvlExecutionContext.evlExecutionContextBuilder;
-import static hu.blackbelt.epsilon.runtime.execution.model.emf.WrappedEmfModelContext.wrappedEmfModelContextBuilder;
 import static java.util.Collections.emptyList;
 
-public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator {
+public class ExpressionValidatorOnAsm {
 
-    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot)
-            throws ScriptExecutionException, URISyntaxException {
-        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, scriptRoot, emptyList(), emptyList());
+    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel)
+            throws ExpressionValidationException {
+        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, emptyList(), emptyList());
     }
 
-    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
-                                               Collection<String> expectedErrors, Collection<String> expectedWarnings)
-            throws ScriptExecutionException, URISyntaxException {
-        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel, scriptRoot, expectedErrors, expectedWarnings, true);
-    }
+    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel,
+                                   Collection<String> expectedErrors, Collection<String> expectedWarnings)
+            throws ExpressionValidationException {
 
-    public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel, URI scriptRoot,
-                                   Collection<String> expectedErrors, Collection<String> expectedWarnings, Boolean useCache)
-            throws ScriptExecutionException, URISyntaxException {
+        ExpressionValidator.validateExpression(log, expressionModel,
+                new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet()), expectedErrors, expectedWarnings);
 
+        /*
+            context EXPR!TypeName {
+
+                // object type with name defined by ElementName must exists in the namespace
+                constraint ObjectTypeIsValid {
+                    check: self.get(modelAdapter).isDefined()
+                    message: "Element named " + self.name + " not found in namespace " + self.namespace
+                }
+            }
+
+            context EXPR!Expression {
+
+                // variable reference in lambda expression is referencing to variable visible from its scope
+                constraint LambdaVariableIsValid {
+                    guard: evaluator.isLambdaFunction(self)
+
+                    check: evaluator.getVariablesOfScope(self).containsAll(evaluator.getExpressionTerms(self).select(e | e.isKindOf(EXPR!VariableReference)).collect(e | e.variable))
+                    message: "Invalid variable references: " + evaluator.getExpressionTerms(self).select(e | e.isKindOf(EXPR!VariableReference)).collect(e | e.variable).excludingAll(evaluator.getVariablesOfScope(self)) + " in expression: " + self
+                }
+            }
+         */
+        /*
         final Map<String, Object> injections = new HashMap<>();
         injections.put("evaluator", new ExpressionEvaluator());
         injections.put("modelAdapter", new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet()));
@@ -109,5 +117,6 @@ public class ExpressionEpsilonValidatorOnAsm extends ExpressionEpsilonValidator 
             } catch (Exception e) {
             }
         }
+        */
     }
 }

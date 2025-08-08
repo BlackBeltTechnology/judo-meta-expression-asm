@@ -20,14 +20,13 @@ package hu.blackbelt.judo.meta.expression.runtime;
  * #L%
  */
 
-import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.ExecutionContextOnAsmTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionEpsilonValidatorOnAsm.validateExpressionOnAsm;
+import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator.calculateExpressionValidationScriptURI;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -45,7 +44,7 @@ class FullAsmTest extends ExecutionContextOnAsmTest {
     @Test
     void test() throws Exception {
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
-            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI());
+            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel);
         }
     }
 }

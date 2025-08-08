@@ -21,7 +21,6 @@ package hu.blackbelt.judo.meta.expression.builder.jql.asm;
  */
 
 import com.google.common.collect.ImmutableList;
-import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.Expression;
 import hu.blackbelt.judo.meta.expression.builder.jql.CreateExpressionArguments;
@@ -38,10 +37,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionEpsilonValidatorOnAsm.validateExpressionOnAsm;
+import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.builder.jql.JqlExpressionBuilder.BindingType.ATTRIBUTE;
 import static hu.blackbelt.judo.meta.expression.builder.jql.JqlExpressionBuilder.BindingType.RELATION;
-import static hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator.calculateExpressionValidationScriptURI;
 import static hu.blackbelt.judo.meta.measure.runtime.MeasureModel.buildMeasureModel;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -115,7 +113,7 @@ public class AsmJqlExpressionBindingTest extends ExecutionContextOnAsmTest {
                 .build();
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(
-                    bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI(),
+                    bufferedLog, asmModel, measureModel, expressionModel,
                     ImmutableList.of(
                             "StringExpressionMatchesBinding|Attribute named orderDate must be string type, because the assigned expression evaluates to a string.",
                             "TimestampExpressionMatchesBinding|Attribute named freight must be timestamp type, because the assigned expression evaluates to a timestamp.",
@@ -144,7 +142,7 @@ public class AsmJqlExpressionBindingTest extends ExecutionContextOnAsmTest {
                 .build();
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(
-                    bufferedLog, asmModel, measureModel, expressionModel, calculateExpressionValidationScriptURI(),
+                    bufferedLog, asmModel, measureModel, expressionModel,
                     ImmutableList.of(
                             "CollectionExpressionMatchesBinding|Reference named category refers to an object but the assigned expression evaluates to a collection.",
                             "ReferenceExpressionMatchesBinding|Reference named category does not match the type of the assigned expression",
