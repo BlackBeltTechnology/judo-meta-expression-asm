@@ -39,84 +39,12 @@ public class ExpressionValidatorOnAsm {
     }
 
     public static void validateExpressionOnAsm(Logger log, AsmModel asmModel, MeasureModel measureModel, ExpressionModel expressionModel,
-                                   Collection<String> expectedErrors, Collection<String> expectedWarnings)
+                                               Collection<String> expectedErrors, Collection<String> expectedWarnings)
             throws ExpressionValidationException {
-
         ExpressionValidator.validateExpression(log, expressionModel,
-                new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet()), expectedErrors, expectedWarnings);
-
-        /*
-            context EXPR!TypeName {
-
-                // object type with name defined by ElementName must exists in the namespace
-                constraint ObjectTypeIsValid {
-                    check: self.get(modelAdapter).isDefined()
-                    message: "Element named " + self.name + " not found in namespace " + self.namespace
-                }
-            }
-
-            context EXPR!Expression {
-
-                // variable reference in lambda expression is referencing to variable visible from its scope
-                constraint LambdaVariableIsValid {
-                    guard: evaluator.isLambdaFunction(self)
-
-                    check: evaluator.getVariablesOfScope(self).containsAll(evaluator.getExpressionTerms(self).select(e | e.isKindOf(EXPR!VariableReference)).collect(e | e.variable))
-                    message: "Invalid variable references: " + evaluator.getExpressionTerms(self).select(e | e.isKindOf(EXPR!VariableReference)).collect(e | e.variable).excludingAll(evaluator.getVariablesOfScope(self)) + " in expression: " + self
-                }
-            }
-         */
-        /*
-        final Map<String, Object> injections = new HashMap<>();
-        injections.put("evaluator", new ExpressionEvaluator());
-        injections.put("modelAdapter", new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet()));
-
-        ExecutionContext executionContext = executionContextBuilder()
-                .log(log)
-                .resourceSet(asmModel.getResourceSet())
-                .metaModels(emptyList())
-                .modelContexts(Arrays.asList(
-                        wrappedEmfModelContextBuilder()
-                                .log(log)
-                                .name("ASM")
-                                .resource(asmModel.getResource())
-                                .validateModel(false)
-                                .useCache(useCache)
-                                .build(),
-                        wrappedEmfModelContextBuilder()
-                                .log(log)
-                                .name("MEASURES")
-                                .resource(measureModel.getResource())
-                                .validateModel(false)
-                                .useCache(useCache)
-                                .build(),
-                        wrappedEmfModelContextBuilder()
-                                .log(log)
-                                .name("EXPR")
-                                .resource(expressionModel.getResource())
-                                .validateModel(false)
-                                .useCache(useCache)
-                                .build()))
-                .injectContexts(injections)
-                .build();
-
-        try {
-            // run the model / metadata loading
-            executionContext.load();
-
-            // Transformation script
-            executionContext
-                    .executeProgram(evlExecutionContextBuilder().source(UriUtil.resolve("expression.evl", scriptRoot))
-                            .parallel(true)
-                            .expectedErrors(expectedErrors).expectedWarnings(expectedWarnings).build());
-
-        } finally {
-            executionContext.commit();
-            try {
-                executionContext.close();
-            } catch (Exception e) {
-            }
-        }
-        */
+                new AsmModelAdapter(asmModel.getResourceSet(), measureModel.getResourceSet()),
+                "ASM", asmModel.getResource(), "MEASURES", measureModel.getResource(),
+                expectedErrors, expectedWarnings);
     }
+
 }

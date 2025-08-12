@@ -100,6 +100,9 @@
         <judo-meta-jql-version>1.0.4-SNAPSHOT</judo-meta-jql-version>
         <judo-meta-measure-version>1.0.2-SNAPSHOT</judo-meta-measure-version>
 
+        <osgi-utils-version>1.1.1.20250806_043152_8f695d2d_develop</osgi-utils-version>
+        <karaf-features-version>2.0.2.20250806_004748_d0c312c1_develop</karaf-features-version>
+
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
         <moduleProperties />
@@ -816,6 +819,7 @@
                 <module>builder-jql-asm-test</module>
                 <module>feature-adapter-asm</module>
                 <module>feature-builder-jql-asm</module>
+                <module>osgi-itest</module>
                 <module>site</module>
             </modules>
         </profile>

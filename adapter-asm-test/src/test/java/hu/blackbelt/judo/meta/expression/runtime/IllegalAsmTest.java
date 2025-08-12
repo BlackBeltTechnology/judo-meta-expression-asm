@@ -73,7 +73,7 @@ public class IllegalAsmTest extends ExecutionContextOnAsmTest {
     void test() throws Exception {
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             assertThrows(
-                    ExpressionModel.ExpressionValidationException.class,
+                    ExpressionValidationException.class,
                     () -> validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel)
             );
         }
