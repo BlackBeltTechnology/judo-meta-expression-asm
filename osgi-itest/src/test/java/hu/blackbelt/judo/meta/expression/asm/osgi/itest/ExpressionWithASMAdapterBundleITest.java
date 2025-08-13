@@ -179,9 +179,8 @@ public class ExpressionWithASMAdapterBundleITest {
                 .add( "model/" + DEMO_ASM+ ".judo-meta-asm",
                         new ByteArrayInputStream(os.toByteArray()))
                 .set( Constants.BUNDLE_MANIFESTVERSION, "2")
-                .set( Constants.BUNDLE_SYMBOLICNAME, DEMO_ASM + "-psm" )
+                .set( Constants.BUNDLE_SYMBOLICNAME, DEMO_ASM + "-asm" )
                 .set( "Asm-Models", "file=model/" + DEMO_ASM + ".judo-meta-asm;name=" + DEMO_ASM)
-                .set( "Measure-Models", "file=model/" + DEMO_ASM + ".judo-meta-asm;name=" + DEMO_ASM)
                 .build( withBnd());
     }
 
