@@ -68,8 +68,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>2.8.0.20250806_043203_dd165e06_develop</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>2.8.0.20250806_043652_4b0c33fe_develop</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>2.8.0.20250818_020714_e9350189_feature_JNG_6322_Minimiize_Karaf_Size</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>2.8.0.20250818_020949_2418d14d_feature_JNG_6322_Minimiize_Karaf_Size</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -95,13 +95,13 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5-SNAPSHOT</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4-SNAPSHOT</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4-SNAPSHOT</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2-SNAPSHOT</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20250818_022353_405ea881_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20250818_021505_e5c6a473_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20250818_013958_8d9d8c51_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20250818_021501_323ca3da_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-measure-version>
 
-        <osgi-utils-version>1.1.1.20250806_043152_8f695d2d_develop</osgi-utils-version>
-        <karaf-features-version>2.0.2.20250806_004748_d0c312c1_develop</karaf-features-version>
+        <osgi-utils-version>1.1.1.20250818_013742_61ce62eb_feature_JNG_6322_Minimiize_Karaf_Size</osgi-utils-version>
+        <karaf-features-version>2.0.2.20250818_010007_6dbbe9be_feature_JNG_6322_Minimiize_Karaf_Size</karaf-features-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
