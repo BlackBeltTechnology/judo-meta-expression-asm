@@ -108,7 +108,7 @@
         <dependency>
             <groupId>hu.blackbelt.judo.meta</groupId>
             <artifactId>hu.blackbelt.judo.meta.expression.osgi</artifactId>
-            <version>${project.version}</version>
+            <version>${judo-meta-expression-version}</version>
             <scope>test</scope>
         </dependency>
 
