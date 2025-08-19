@@ -20,7 +20,6 @@ package hu.blackbelt.judo.meta.expression.runtime;
  * #L%
  */
 
-import org.slf4j.Logger;
 import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.ExecutionContextOnAsmTest;
 import hu.blackbelt.judo.meta.expression.operator.DecimalOperator;
@@ -34,11 +33,10 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionEpsilonValidatorOnAsm.validateExpressionOnAsm;
+import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.constant.util.builder.ConstantBuilders.newDecimalConstantBuilder;
 import static hu.blackbelt.judo.meta.expression.constant.util.builder.ConstantBuilders.newMeasuredDecimalBuilder;
 import static hu.blackbelt.judo.meta.expression.numeric.util.builder.NumericBuilders.newDecimalArithmeticExpressionBuilder;
-import static hu.blackbelt.judo.meta.expression.runtime.ExpressionEpsilonValidator.calculateExpressionValidationScriptURI;
 
 @Slf4j
 public class MeasuredTest extends ExecutionContextOnAsmTest {
@@ -86,7 +84,6 @@ public class MeasuredTest extends ExecutionContextOnAsmTest {
         try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
             validateExpressionOnAsm(bufferedLog,
                                     asmModel, measureModel, expressionModel,
-                                    calculateExpressionValidationScriptURI(),
                                     Arrays.asList("MeasureOfAdditionIsValid|Measures of addition are not matching: (1[kg] + 10)"),
                                     Collections.emptyList());
         }
