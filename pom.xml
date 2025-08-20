@@ -68,8 +68,8 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
 
-		<epsilon-runtime-version>2.8.0.20250818_020714_e9350189_feature_JNG_6322_Minimiize_Karaf_Size</epsilon-runtime-version>
-		<epsilon-runtime-eclipse-version>2.8.0.20250818_020949_2418d14d_feature_JNG_6322_Minimiize_Karaf_Size</epsilon-runtime-eclipse-version>
+		<epsilon-runtime-version>2.8.0.20250820_074004_d018a661_develop</epsilon-runtime-version>
+		<epsilon-runtime-eclipse-version>2.8.0.20250820_074358_a6e37faa_develop</epsilon-runtime-eclipse-version>
         
         <src.dir>src/main</src.dir>
 
@@ -95,13 +95,13 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20250818_022353_405ea881_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20250818_021505_e5c6a473_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-asm-version>
-        <judo-meta-jql-version>1.0.4.20250818_013958_8d9d8c51_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20250818_021501_323ca3da_feature_JNG_6322_Minimiize_Karaf_Size</judo-meta-measure-version>
+		<judo-meta-expression-version>1.0.5.20250820_075409_1458b4cd_develop</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4.20250820_074844_0c801b69_develop</judo-meta-asm-version>
+        <judo-meta-jql-version>1.0.4.20250820_074230_9d12e127_develop</judo-meta-jql-version>
+        <judo-meta-measure-version>1.0.2.20250820_074920_7f26d068_develop</judo-meta-measure-version>
 
-        <osgi-utils-version>1.1.1.20250818_013742_61ce62eb_feature_JNG_6322_Minimiize_Karaf_Size</osgi-utils-version>
-        <karaf-features-version>2.0.2.20250818_010007_6dbbe9be_feature_JNG_6322_Minimiize_Karaf_Size</karaf-features-version>
+        <osgi-utils-version>1.1.1.20250820_074012_493b49e0_develop</osgi-utils-version>
+        <karaf-features-version>2.0.2.20250819_222507_53cf7261_develop</karaf-features-version>
 
         <!-- Define overridable properties for tycho-surefire-plugin -->
         <platformSystemProperties />
