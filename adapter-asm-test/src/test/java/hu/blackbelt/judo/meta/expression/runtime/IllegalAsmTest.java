@@ -20,28 +20,31 @@ package hu.blackbelt.judo.meta.expression.runtime;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.*;
+import hu.blackbelt.judo.meta.expression.adapters.asm.validation.AbstractExpressionAsmValidationTest;
+import hu.blackbelt.judo.meta.expression.adapters.asm.validation.ValidatorType;
 import hu.blackbelt.judo.meta.expression.constant.Instance;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.constant.util.builder.ConstantBuilders.newInstanceBuilder;
 import static hu.blackbelt.judo.meta.expression.object.util.builder.ObjectBuilders.newObjectNavigationExpressionBuilder;
 import static hu.blackbelt.judo.meta.expression.object.util.builder.ObjectBuilders.newObjectVariableReferenceBuilder;
 import static hu.blackbelt.judo.meta.expression.string.util.builder.StringBuilders.newStringAttributeBuilder;
 import static hu.blackbelt.judo.meta.expression.util.builder.ExpressionBuilders.newTypeNameBuilder;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
-public class IllegalAsmTest extends ExecutionContextOnAsmTest {
+public class IllegalAsmTest extends AbstractExpressionAsmValidationTest {
+
+    private final ExecutionContextOnAsmTest context = new ExecutionContextOnAsmTest();
 
     @BeforeEach
     public void setUp() throws Exception {
-        super.setUp();
+        context.setUp();
+        setModelAdapter(context.asmModel, context.measureModel);
 
         expressionModel = ExpressionModelForTest.createExpressionModel();
 
@@ -69,13 +72,22 @@ public class IllegalAsmTest extends ExecutionContextOnAsmTest {
         assertTrue(expressionModel.isValid());
     }
 
-    @Test
-    void test() throws Exception {
-        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
-            assertThrows(
-                    ExpressionValidationException.class,
-                    () -> validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel)
-            );
+    @ParameterizedTest(name = "testIllegalExpression [{0}]")
+    @EnumSource(ValidatorType.class)
+    void test(ValidatorType type) throws Exception {
+        this.validatorType = type;
+        try {
+            runValidation();
+            // If we get here without exception, the test should fail
+            // (unless it was skipped via assumption inside runValidation)
+            throw new AssertionError("Expected ExpressionValidationException to be thrown");
+        } catch (ExpressionValidationException e) {
+            // This is the expected outcome for illegal expressions
+            log.info("Got expected validation exception: {}", e.getMessage());
+        } catch (org.opentest4j.TestAbortedException e) {
+            // Test was skipped due to assumptions (e.g., adapter incompatibility)
+            // Just rethrow to properly skip the test
+            throw e;
         }
     }
 }
