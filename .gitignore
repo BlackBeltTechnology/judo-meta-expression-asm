@@ -59,3 +59,7 @@ wercker.env
 build.log
 .vscode
 **/.flattened-pom.xml
+.claude
+.gemini
+.opencode
+.agent
