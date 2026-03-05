@@ -35,24 +35,24 @@ Key facts:
 
 ## Depends on
 
-- [judo-meta-asm](../judo-meta-asm): models/judo-meta-asm
-- [judo-meta-expression](../judo-meta-expression): models/judo-meta-expression
-- [judo-meta-jql](../judo-meta-jql): models/judo-meta-jql
-- [judo-meta-measure](../judo-meta-measure): models/judo-meta-measure
-- [osgi-utils](../../runtime/osgi-utils): runtime/osgi-utils
-- [epsilon-runtime](../../tools/epsilon-runtime): tools/epsilon-runtime
+- [judo-meta-asm](../judo-meta-asm): ASM metamodel — Ecore-based architecture model with builders and validation
+- [judo-meta-expression](../judo-meta-expression): Expression metamodel — type-safe numeric, string, temporal, and collection expressions
+- [judo-meta-jql](../judo-meta-jql): JQL metamodel — Xtext-based declarative query language
+- [judo-meta-measure](../judo-meta-measure): SI units metamodel — measures, units, and conversion rates
+- [osgi-utils](../../runtime/osgi-utils): OSGi utility library — lifecycle tracking, config monitoring, ranked services
+- [epsilon-runtime](../../tools/epsilon-runtime): Eclipse Epsilon runtime for Maven and OSGi environments
 
 ## Used by
 
-- [judo-meta-expression](../judo-meta-expression): models/judo-meta-expression
-- [judo-meta-script](../judo-meta-script): models/judo-meta-script
-- [judo-platform](../../runtime/judo-platform): runtime/judo-platform
-- [judo-runtime-core](../../runtime/judo-runtime-core): runtime/judo-runtime-core
-- [judo-runtime-core-esm-itest](../../runtime/judo-runtime-core-esm-itest): runtime/judo-runtime-core-esm-itest
-- [judo-script-codegen](../../runtime/judo-script-codegen): runtime/judo-script-codegen
-- [judo-services](../../runtime/judo-services): runtime/judo-services
-- [judo-tatami](../../runtime/judo-tatami): runtime/judo-tatami
-- [judo-tatami-base](../../runtime/judo-tatami-base): runtime/judo-tatami-base
+- [judo-meta-expression](../judo-meta-expression): Expression metamodel — type-safe numeric, string, temporal, and collection expressions
+- [judo-meta-script](../judo-meta-script): Script metamodel — typed scripting language with ASM/ESM adapters
+- [judo-platform](../../runtime/judo-platform): Model-driven OSGi runtime platform with REST APIs and Karaf deployment
+- [judo-runtime-core](../../runtime/judo-runtime-core): Multi-module runtime engine — data access, business logic, REST, and security
+- [judo-runtime-core-esm-itest](../../runtime/judo-runtime-core-esm-itest): Integration tests for ESM-to-RDBMS transformation pipeline
+- [judo-script-codegen](../../runtime/judo-script-codegen): Transpiles JCL scripts into executable Java source code
+- [judo-services](../../runtime/judo-services): OSGi runtime services enabling multiple data models in a single Karaf container
+- [judo-tatami](../../runtime/judo-tatami): Model transformation pipeline — ESM/PSM to deployable application artifacts
+- [judo-tatami-base](../../runtime/judo-tatami-base): PSM transformation pipeline — models to schemas, expressions, and configurations
 
 ## Optional
 
