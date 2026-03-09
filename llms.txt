@@ -1,0 +1,60 @@
+# judo-meta-expression-asm
+
+> Bridges JUDO Expression models with ASM (Architecture Specific Model) models by providing adapters that resolve symbolic references to concrete ASM elements and extract JQL expressions.
+
+Key facts:
+- Java 21, Maven 3.9.4 with Tycho 4.0.13 (Eclipse/OSGi plugin builder)
+- 8 modules: 2 OSGi bundles, 2 test modules, 2 Eclipse features, 1 integration test, 1 P2 update site
+- Built on Eclipse EMF, Epsilon Runtime, and OSGi
+- Depends on judo-meta-expression, judo-meta-asm, judo-meta-measure, and judo-meta-jql metamodels
+- Licensed under Eclipse Public License 2.0 (EPL-2.0)
+
+## Docs
+
+- [README.md](README.md): Project overview, architecture diagrams, key classes, and module structure
+- [AGENTS.md](AGENTS.md): Build commands, directory structure, technology stack, and development conventions
+- [CONTRIBUTING.md](CONTRIBUTING.md): Development setup, code structure, and submission guidelines
+- [.github/CIFLOW.md](.github/CIFLOW.md): Branching strategy and CI/CD pipeline details
+
+## Modules — Core
+
+- [adapter-asm/pom.xml](adapter-asm/pom.xml): OSGi bundle implementing ModelAdapter for ASM types (EClass, EAttribute, EReference, EDataType, EEnum)
+- [builder-jql-asm/pom.xml](builder-jql-asm/pom.xml): OSGi bundle that extracts JQL queries from ASM models and builds Expression model trees
+
+## Modules — Tests
+
+- [adapter-asm-test/pom.xml](adapter-asm-test/pom.xml): JUnit 5 unit tests for the ASM adapter layer
+- [builder-jql-asm-test/pom.xml](builder-jql-asm-test/pom.xml): JUnit 5 unit tests for the JQL builder layer
+- [osgi-itest/pom.xml](osgi-itest/pom.xml): OSGi integration tests validating bundle loading and wiring in Apache Karaf via Pax Exam
+
+## Modules — Eclipse Distribution
+
+- [feature-adapter-asm/feature.xml](feature-adapter-asm/feature.xml): Eclipse feature packaging the adapter bundle for installation
+- [feature-builder-jql-asm/feature.xml](feature-builder-jql-asm/feature.xml): Eclipse feature packaging the builder bundle for installation
+- [site/pom.xml](site/pom.xml): Eclipse P2 update site compiling features into an installable repository
+
+## Depends on
+
+- [judo-meta-asm](../judo-meta-asm): ASM metamodel — Ecore-based architecture model with builders and validation
+- [judo-meta-expression](../judo-meta-expression): Expression metamodel — type-safe numeric, string, temporal, and collection expressions
+- [judo-meta-jql](../judo-meta-jql): JQL metamodel — Xtext-based declarative query language
+- [judo-meta-measure](../judo-meta-measure): SI units metamodel — measures, units, and conversion rates
+- [osgi-utils](../../runtime/osgi-utils): OSGi utility library — lifecycle tracking, config monitoring, ranked services
+- [epsilon-runtime](../../tools/epsilon-runtime): Eclipse Epsilon runtime for Maven and OSGi environments
+
+## Used by
+
+- [judo-meta-expression](../judo-meta-expression): Expression metamodel — type-safe numeric, string, temporal, and collection expressions
+- [judo-meta-script](../judo-meta-script): Script metamodel — typed scripting language with ASM/ESM adapters
+- [judo-platform](../../runtime/judo-platform): Model-driven OSGi runtime platform with REST APIs and Karaf deployment
+- [judo-runtime-core](../../runtime/judo-runtime-core): Multi-module runtime engine — data access, business logic, REST, and security
+- [judo-runtime-core-esm-itest](../../runtime/judo-runtime-core-esm-itest): Integration tests for ESM-to-RDBMS transformation pipeline
+- [judo-script-codegen](../../runtime/judo-script-codegen): Transpiles JCL scripts into executable Java source code
+- [judo-services](../../runtime/judo-services): OSGi runtime services enabling multiple data models in a single Karaf container
+- [judo-tatami](../../runtime/judo-tatami): Model transformation pipeline — ESM/PSM to deployable application artifacts
+- [judo-tatami-base](../../runtime/judo-tatami-base): PSM transformation pipeline — models to schemas, expressions, and configurations
+
+## Optional
+
+- [LICENSE.txt](LICENSE.txt): Eclipse Public License 2.0 text
+- [logback-test.xml](logback-test.xml): Test logging configuration
