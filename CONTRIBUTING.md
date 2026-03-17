@@ -1,143 +1,134 @@
 # Contributing to JUDO
 
-## Installing the correct versions of Java, Maven and necessary dependencies
+## Development Environment
 
-Please make sure your development environment complies with the requirements discussed under the relevant section of the parent
-project's [CONTRIBUTING](https://github.com/BlackBeltTechnology/judo-community/blob/develop/CONTRIBUTING.adoc) guide.
+Before you start, make sure your environment meets these requirements (detailed in the [judo-community CONTRIBUTING guide](https://github.com/BlackBeltTechnology/judo-community/blob/develop/CONTRIBUTING.adoc)):
+
+| Requirement | Version |
+|---|---|
+| Java JDK | 21 |
+| Maven | 3.9.4+ (wrapper included via `./mvnw`) |
 
 ## Code Structure
 
-This project follows a standard Java project structure, governed by Maven, with potential Maven submodules.
+This is a multi-module Maven project built with Tycho for Eclipse/OSGi compatibility. Modules are grouped by purpose:
 
-**Eclipse-related submodules:**
+### Adapter & Builder (Core Logic)
 
-* `/feature-adapter-asm`: Eclipse feature repository - allows us to use this as a feature for eclipse installation
-* `/feature-builder-jql-asm`: Eclipse feature repository - allows us to use this as a feature for eclipse installation
-* `/site`: Eclipse Update Site - all built versions are compiled as an update site.
-The site definition contains the required referenced repositories required by plugins.
-* `/targetdefinition`: Eclipse target definition defines the P2 repositories for all the required MANIFEST features.
+| Module | Description |
+|---|---|
+| `adapter-asm/` | Eclipse plugin — core ASM adapter implementing `ModelAdapter` for Expression-to-ASM bridging |
+| `adapter-asm-test/` | Unit tests for the adapter (JUnit 5) |
+| `builder-jql-asm/` | Eclipse plugin — JQL expression extractor and builder for ASM models |
+| `builder-jql-asm-test/` | Unit tests for the builder (JUnit 5) |
 
-The Judo update sites are based on versions, therefore all versions have their own update sites. This results in versions
-being coded in the URL. The category definition in tycho is loaded as an extension, because there is no way to replace
-the version numbers before tycho is activated.
+### Eclipse Distribution
 
-For this reason, a profile is created which can replace the versions with the dependency versions defined in the parent.
+| Module | Description |
+|---|---|
+| `feature-adapter-asm/` | Eclipse feature descriptor — packages the adapter plugin for Eclipse installation |
+| `feature-builder-jql-asm/` | Eclipse feature descriptor — packages the builder plugin for Eclipse installation |
+| `site/` | Eclipse P2 Update Site — compiles all features into an installable update site |
 
-The following command can be used to update the versions:
+### Integration Testing
+
+| Module | Description |
+|---|---|
+| `osgi-itest/` | OSGi integration tests using Pax Exam and Apache Karaf runtime |
+
+## Build Lifecycle
+
+```mermaid
+flowchart LR
+    validate --> compile --> test --> package --> verify --> install
+    install -->|"profile: sign-artifacts"| sign["GPG Sign"]
+    install -->|"profile: release-judong"| nexus["Deploy to JUDO Nexus"]
+    install -->|"profile: release-central"| central["Deploy to Maven Central"]
+```
+
+### Common Commands
+
+```sh
+# Full build
+./mvnw clean install
+
+# Run all tests
+./mvnw clean test
+
+# Run tests for a specific module
+./mvnw clean test -pl adapter-asm-test
+
+# Skip tests
+./mvnw clean install -DskipTests
+```
+
+### Updating Eclipse P2 Category Versions
+
+The JUDO update sites encode version numbers in their URLs. Since Tycho loads category definitions before version properties are available, a dedicated profile handles the replacement:
 
 ```sh
 mvn clean install -P update-category-versions -f site/pom.xml
 ```
 
-**Adapters:**
-
-* `/adapter-asm`: Eclipse plugin
-* `/adapter-asm-test`: Eclipse plugin test
-
-**Builders:**
-
-* `/builder-jql-asm`: Eclipse plugin
-* `/builder-jql-asm-test`: Eclipse plugin test
-
 ## Working with Eclipse
 
-### Plugin requirements
+### Required Plugins
 
-- m2e
-- epsilon
-- modeling tools
+- m2e (Maven integration)
+- Epsilon
+- Eclipse Modeling Tools
 
 ### Installation
 
-In Eclipse, we can install the plugin via P2 sites.
+Install the plugin via the P2 update site: go to **Install New Software** in Eclipse, add the URL from the GitHub release page (or point to the uncompressed ZIP folder), and install the features.
 
-Go to "Install new software" and add the URL of the site listed on github or the uncompressed ZIP folder. The plugin
-contains the metamodel and UI provided for the default editor.
+### Code Generation
 
-### Code generation in Eclipse
+To run code generation inside Eclipse, execute the MWE2 Workflow:
 
-To run code generation inside Eclipse, run the MWE2 Workflow: `hu.blackbelt.judo.meta.asm.model project src/workflow/generateModel.mwe2`
+```
+hu.blackbelt.judo.meta.asm.model project → src/workflow/generateModel.mwe2
+```
 
-Required features to be installed:
-
-* XTend
-* XText
-* MWE
-* MWE2
+Required Eclipse features: XTend, XText, MWE, MWE2.
 
 ## Troubleshooting
 
-### Running JUnit tests in Eclipse
+### JUnit Tests in Eclipse
 
-There is a problem with Eclipse and Tycho. The classpath does not contain JUnit.
+There is a known issue where Eclipse + Tycho does not include JUnit on the classpath automatically. A `Required-Bundle` entry has been added to the OSGi Manifest as a workaround (not Tycho's recommended approach). See [Eclipse Bug 534587](https://bugs.eclipse.org/bugs/show_bug.cgi?id=534587).
 
-```xml
-<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-```
+### Lombok
 
-Now a `Required-Bundle` has been added to the OSGi Manifest which is not the Tycho recommended way.
+Tycho does not support Lombok generation directly ([lombok#285](https://github.com/rzwitserloot/lombok/issues/285)). No Lombok is used in this project — all source code is either hand-written or generated.
 
-See: https://bugs.eclipse.org/bugs/show_bug.cgi?id=534587
+### Tycho Repository References
 
-### Problems with Lombok
-
-Tycho does not support Lombok generation directly as mentioned in https://github.com/rzwitserloot/lombok/issues/285.
-This will be fixed in a later version. No lombok is used in the eclipse projects, every source code file is generated.
-
-### Problems with Tycho
-
-Tycho 1.4.0 and below does not handle repository references inside site definitions, so all the referenced plugin
-sites have to be added manually. See: https://bugs.eclipse.org/bugs/show_bug.cgi?id=453708
+Tycho 1.4.0 and below does not handle repository references inside site definitions, so all referenced plugin sites must be added manually. See [Eclipse Bug 453708](https://bugs.eclipse.org/bugs/show_bug.cgi?id=453708).
 
 ## Version Policy
 
-Two worlds collide in this project. Maven and Eclipse have a different view about versions. While Maven is using `SNAPSHOT`
-versions, Eclipse is using `.qualifier` in the qualifier part of semantic version.
+Maven and Eclipse have different version conventions:
 
-Which means that: `1.0.0.qualifier` is the equivalent of Maven's `1.0.0-SNAPSHOT` notation.
+| Convention | Example |
+|---|---|
+| Maven snapshot | `1.0.0-SNAPSHOT` |
+| Eclipse qualifier | `1.0.0.qualifier` |
 
-To address this, the Tycho Versions Plugin is used to replace the qualifier and Maven versions for a technical version
-number in every build.
+The Tycho Versions Plugin automatically converts between these formats during each build.
 
 ## Submission Guidelines
 
 ### Submitting an Issue
 
-Before you submit an issue, please search the issue tracker. An issue for your problem may already exist and has been
-resolved, or the discussion might inform you of workarounds readily available.
+Before filing, search the [issue tracker](https://github.com/BlackBeltTechnology/judo-meta-asm/issues) for existing reports. When filing a new issue, include:
 
-We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. Having a
-reproducible scenario gives us wealth of important information without going back and forth with you requiring
-additional information, such as:
-
-- the output of `java -version`, `mvn -version`
+- Output of `java -version` and `mvn -version`
 - `pom.xml` or `.flattened-pom.xml` (when applicable)
-- and most importantly - a use-case that fails
+- A minimal reproduction case
 
-A minimal reproduction allows us to quickly confirm a bug (or point out a coding problem) as well as confirm that we are
-fixing the right problem.
+### Submitting a Pull Request
 
-We will be insisting on a minimal reproduction in order to save maintainers' time and ultimately be able to fix more
-bugs. We understand that sometimes it might be hard to extract essentials bits of code from a larger codebase, but we
-really need to isolate the problem before we can fix it.
+This project follows [GitHub's standard forking model](https://guides.github.com/activities/forking/). Fork the project, create your feature branch, and submit a pull request.
 
-You can file new issues by filling out our [issue form](https://github.com/BlackBeltTechnology/judo-meta-expression-asm/issues/new/choose).
-
-### Submitting a PR
-
-This project follows [GitHub's standard forking model](https://guides.github.com/activities/forking/). Please fork the
-project to submit pull requests.
-
-## Commands
-
-### Run Tests
-
-```sh
-mvn clean test
-```
-
-### Run Full build
-
-```sh
-mvn clean install
-```
+> **Important:** All commits must reference a JIRA ticket (e.g., `JNG-123`). No commit without a ticket number.

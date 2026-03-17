@@ -1,184 +1,189 @@
-<!-- OPENSPEC:START -->
-# OpenSpec Instructions
-
-These instructions are for AI assistants working in this project.
-
-Always open `@/openspec/AGENTS.md` when the request:
-- Mentions planning or proposals (words like proposal, spec, change, plan)
-- Introduces new capabilities, breaking changes, architecture shifts, or big performance/security work
-- Sounds ambiguous and you need the authoritative spec before coding
-
-Use `@/openspec/AGENTS.md` to learn:
-- How to create and apply change proposals
-- Spec format and conventions
-- Project structure and guidelines
-
-Keep this managed block so 'openspec update' can refresh the instructions.
-
-<!-- OPENSPEC:END -->
-
-# Judo Expression ESM Adapter - Project Documentation
+# JUDO Expression ASM Adapter - Project Documentation
 
 ## Project Overview
 
-**Repository:** BlackBeltTechnology/judo-meta-expression-esm
+
+**Repository:** BlackBeltTechnology/judo-meta-expression-asm
 **License:** Eclipse Public License 2.0 (EPL-2.0)
 **Java Version:** 21
-**Build System:** Maven 3.9.4+ with Tycho (Eclipse build tooling)
+**Build System:** Maven 3.9.4 with Tycho 4.0.13 (Eclipse/OSGi plugin builder)
 
-This is an Eclipse/Tycho-based adapter project that:
-1. **Adapts** ESM (Enterprise Service Model) models for use with JUDO Expression Language
-2. **Provides** measure support and type mappings between Expression and ESM metamodels
-3. **Includes** JQL (Judo Query Language) expression builder integration
-4. **Supports** dual validation testing (EVL and Java validators)
-5. **Distributes** via both Maven Central and Eclipse P2 repositories
+1. Bridges JUDO Expression models with ASM (Abstract Structural Model) models by resolving symbolic references to concrete ASM elements
+2. Implements the generic `ModelAdapter` interface for ASM-specific EMF types (`EClass`, `EAttribute`, `EReference`, `EDataType`, `EEnum`)
+3. Provides measure and unit resolution for numeric expressions via `AsmMeasureProvider`
+4. Extracts JQL (JUDO Query Language) expressions from ASM models and builds corresponding Expression model trees via `AsmJqlExtractor`
+5. Packages everything as OSGi bundles distributable through an Eclipse P2 update site
+
+## Code Instructions
+
+1. First think through the problem, read the codebase for relevant files.
+2. Before you make any major changes, check in with me and I will verify the plan.
+3. Please every step of the way just give me a high level explanation of what changes you made.
+4. Make every task and code change you do as simple as possible. We want to avoid making any massive or complex changes. Every change should impact as little code as possible. Everything is about simplicity.
+5. Maintain a documentation file that describes how the architecture of the app works inside and out.
+6. Never speculate about code you have not opened. If the user references a specific file, you MUST read the file before answering. Make sure to investigate and read relevant files BEFORE answering questions about the codebase. Never make any claims about code before investigating unless you are certain of the correct answer - give grounded and hallucination-free answers.
+7. For implementation use TDD (Test-Driven Development): write or update tests first to define the expected behaviour, verify they fail, then write the minimal implementation to make them pass.
+8. Use DRY (Don't Repeat Yourself): extract reusable logic into separate classes, utilities, or components. If the same pattern appears in multiple places, refactor it into a shared helper.
 
 ## Directory Structure
 
 ```
-judo-meta-expression-esm/
-├── adapter-esm/                    # Core ESM adapter implementation
-├── adapter-esm-test/               # Test utilities and validation tests
-├── builder-jql-esm-test/           # JQL builder tests
-├── feature-adapter-esm/            # Eclipse feature packaging
-├── feature-builder-jql-esm/        # JQL builder feature
-├── osgi-itest/                     # OSGi integration tests (Pax Exam)
-├── site/                           # P2 update site
-├── docs/                           # Documentation
-│   └── validation/                 # Validation testing documentation
-└── openspec/                       # OpenSpec change management
+judo-meta-expression-asm/
+├── adapter-asm/                    # Core ASM adapter (OSGi bundle)
+│   └── src/main/java/.../adapters/asm/
+├── adapter-asm-test/               # Adapter unit tests (JUnit 5)
+│   └── src/test/java/
+├── builder-jql-asm/                # JQL builder for ASM (OSGi bundle)
+│   └── src/main/java/.../builder/jql/asm/
+├── builder-jql-asm-test/           # Builder unit tests (JUnit 5)
+│   └── src/test/java/
+├── feature-adapter-asm/            # Eclipse feature for adapter plugin
+├── feature-builder-jql-asm/        # Eclipse feature for builder plugin
+├── osgi-itest/                     # OSGi integration tests (Pax Exam + Karaf)
+├── site/                           # Eclipse P2 update site
+├── .github/                        # GitHub Actions workflows and docs
+├── .mvn/                           # Maven wrapper configuration
+├── openspec/                       # OpenSpec change tracking
+└── pom.xml                         # Parent POM
 ```
 
 ## Core Modules
 
+### Adapter Layer
+
 | Module | Type | Purpose |
 |--------|------|---------|
-| `adapter-esm/` | eclipse-plugin | Core ESM adapter: EsmModelAdapter, EsmMeasureProvider, ExpressionValidatorOnEsm |
-| `adapter-esm-test/` | bundle | Test utilities (EsmTestModelCreator) and dual validation test infrastructure |
-| `builder-jql-esm-test/` | bundle | JQL expression builder tests |
-| `feature-adapter-esm/` | eclipse-feature | Eclipse feature packaging |
-| `osgi-itest/` | bundle | Pax Exam integration tests for Karaf container |
-| `site/` | eclipse-repository | P2 update site assembly |
+| `adapter-asm/` | OSGi bundle | Implements `ModelAdapter` for ASM models — resolves types, attributes, references, measures, and expression metadata annotations |
+| `adapter-asm-test/` | Test module | JUnit 5 tests for adapter: `AsmModelAdapterTest`, `AsmMeasureProviderTest`, `AsmModelAdapterDimensionTest`, runtime tests (`FullAsmTest`, `MinimalAsmTest`, `MeasuredTest`, `IllegalAsmTest`) |
 
-## Key Components
+### Builder Layer
 
-### Adapter Classes (adapter-esm module)
+| Module | Type | Purpose |
+|--------|------|---------|
+| `builder-jql-asm/` | OSGi bundle | `AsmJqlExtractor` extends `AdaptableJqlExtractor` — extracts JQL queries from ASM and builds Expression model trees |
+| `builder-jql-asm-test/` | Test module | JUnit 5 tests: `AsmJqlExtractorTest`, `AsmJqlExpressionBuilderTest`, `AsmJqlExpressionBindingTest` |
 
-| Class | Purpose |
-|-------|---------|
-| `EsmModelAdapter` | Adapts ESM models for expression processing (811 lines) |
-| `EsmMeasureProvider` | Provides measure support for ESM models (201 lines) |
-| `ExpressionValidatorOnEsm` | Validates expressions on ESM models (46 lines) |
+### Eclipse Distribution
 
-### Validation Test Infrastructure (adapter-esm-test module)
+| Module | Type | Purpose |
+|--------|------|---------|
+| `feature-adapter-asm/` | Eclipse feature | Packages adapter bundle for Eclipse installation |
+| `feature-builder-jql-asm/` | Eclipse feature | Packages builder bundle for Eclipse installation |
+| `site/` | P2 repository | Compiles features into an installable Eclipse update site |
 
-| Class | Purpose |
-|-------|---------|
-| `ValidatorType` | Enum for selecting EVL or Java validator |
-| `AbstractExpressionEsmValidationTest` | Base class for dual validation tests |
-| `ExpressionEsmValidationTest` | Dual validation test cases |
-| `ExpressionEsmValidationPerformanceTest` | Performance comparison tests |
+### Integration Testing
 
-## Validation Architecture
-
-This project imports and executes validators from [judo-meta-expression](https://github.com/BlackBeltTechnology/judo-meta-expression):
-
-- **EVL Validation:** `ExpressionValidator.validateExpression()` - Epsilon Validation Language
-- **Java Validation:** `ExpressionZetaValidator.validateExpression()` - Zeta framework
-
-**No validators are implemented in this project** - only test infrastructure.
-
-### Dual Validation Testing
-
-Tests run with both EVL and Java validators to ensure parity:
-
-```java
-@ParameterizedTest(name = "testValidation [{0}]")
-@EnumSource(ValidatorType.class)
-void testValidation(ValidatorType type) throws Exception {
-    this.validatorType = type;
-    initModels(esmModel, measureModel);
-
-    runValidation(
-        ImmutableList.of(),  // expected errors
-        ImmutableList.of()   // expected warnings
-    );
-}
-```
+| Module | Type | Purpose |
+|--------|------|---------|
+| `osgi-itest/` | Integration test | Validates OSGi bundle loading and wiring in Apache Karaf runtime via Pax Exam |
 
 ## Technology Stack
 
 ### Core Technologies
-- **Eclipse Modeling Framework (EMF)** 2.38.0+ - Metamodel foundation
-- **Ecore** - Model definition language
-- **Tycho** 4.0.13 - Eclipse plugin build
-- **Epsilon** 2.8.0 - Model validation (EVL)
-- **Zeta Framework** - Java validation framework
+- **Eclipse EMF** (2.21+) — Eclipse Modeling Framework for metamodel-driven development
+- **Tycho** (4.0.13) — Maven plugin for building Eclipse plugins and OSGi bundles
+- **Epsilon Runtime** (2.8.0) — Model transformation and execution engine
+- **OSGi** — Module system for Java; bundles declare imports/exports in `META-INF/MANIFEST.MF`
 
-### Dependencies
-- **judo-meta-expression** - Expression metamodel and validators
-- **judo-meta-esm** - Enterprise Service Model metamodel
-- **judo-meta-jql** - JQL metamodel
-- **judo-meta-measure** - Measure metamodel
+### External Model Dependencies
+- **judo-meta-expression** — Expression metamodel (types, operators, variables, bindings)
+- **judo-meta-asm** — Abstract Structural Model metamodel (EClass, EPackage wrappers)
+- **judo-meta-measure** — Measure/unit metamodel (Measure, Unit, DurationUnit, BaseMeasure, DerivedMeasure)
+- **judo-meta-jql** — JUDO Query Language metamodel
 
-### Runtime
-- **Apache Karaf** 4.4.7 - OSGi container
-- **Pax Exam** 4.13.5 - OSGi testing
+### Build & Quality
+- **Maven** 3.9.4 (wrapper: `./mvnw`)
+- **JUnit 5** (Jupiter) — Unit testing via Tycho surefire plugin
+- **Pax Exam** 4.13.5 + **Apache Karaf** 4.4.7 — OSGi integration testing
+- **JaCoCo** 0.8.12 — Code coverage
+- **SLF4J** 2.0.16 + **Logback** 1.5.12 — Logging
 
 ## Build Commands
 
 ```bash
-# Standard build
+# Full build (requires Java 21)
 ./mvnw clean install
+
+# Run all tests
+./mvnw clean test
+
+# Run tests for a specific module
+./mvnw clean test -pl adapter-asm-test
+./mvnw clean test -pl builder-jql-asm-test
+./mvnw clean test -pl osgi-itest
+
+# Run a single test class
+./mvnw clean test -pl adapter-asm-test -Dtest=AsmModelAdapterTest
+
+# Run a single test method
+./mvnw clean test -pl adapter-asm-test -Dtest=AsmModelAdapterTest#testMethodName
 
 # Skip tests
 ./mvnw clean install -DskipTests
 
-# Run performance tests
-./mvnw test -Dgroups=performance
+# Update Eclipse P2 category versions
+mvn clean install -P update-category-versions -f site/pom.xml
 
-# Memory requirements (configured in .mvn/jvm.config)
-# -Xms1024m -Xmx2048m
+# Deploy to JUDO Nexus
+./mvnw deploy -Psign-artifacts -Prelease-judong
 ```
 
 ### Maven Profiles
 
 | Profile | Purpose |
 |---------|---------|
-| `modules` | Includes all submodules (default) |
-| `sign-artifacts` | GPG signing for release |
-| `release-central` | Maven Central deployment |
-| `release-judong` | Internal Judo repository |
+| `modules` | Default — activates all submodules |
+| `sign-artifacts` | GPG-signs build artifacts |
+| `release-dummy` | Deploys to a dummy/test repository |
+| `release-judong` | Deploys to JUDO Nexus (https://nexus.judo.technology) |
+| `release-central` | Deploys to Maven Central via Sonatype OSS |
+| `generate-github-asciidoc-diagrams` | Generates documentation diagrams |
+| `update-source-code-license` | Updates license headers in source files |
 
 ## Key Configuration Files
 
 | File | Purpose |
 |------|---------|
-| `pom.xml` | Parent POM with module definitions |
-| `.mvn/jvm.config` | JVM arguments for Maven build |
-| `adapter-esm/META-INF/MANIFEST.MF` | OSGi bundle manifest |
+| `pom.xml` | Parent POM — defines all module versions, dependencies, profiles, and plugin configuration |
+| `adapter-asm/META-INF/MANIFEST.MF` | OSGi bundle metadata for the adapter plugin (imports, exports, required bundles) |
+| `builder-jql-asm/META-INF/MANIFEST.MF` | OSGi bundle metadata for the builder plugin |
+| `logback-test.xml` | Test logging configuration (INFO level, console appender) |
+| `.github/workflows/` | GitHub Actions CI/CD pipeline definitions |
+| `site/category.xml` | Eclipse P2 update site category definition |
 
 ## Development Environment
 
 **Required:**
 - Java 21 JDK
-- Maven 3.9.4+ (or use ./mvnw wrapper)
+- Maven 3.9.4+ (or use the included `./mvnw` wrapper)
+- Git
 
-**Optional:**
-- Eclipse IDE with m2e and OSGi plugins
-- IntelliJ IDEA with Maven and OSGi plugins
+**Optional (for Eclipse development):**
+- Eclipse IDE with m2e, Epsilon, and Modeling Tools plugins
+- XTend, XText, MWE, MWE2 features (for code generation)
 
 ## Git Workflow
 
 - **Main Branch:** `develop`
-- **Versioning:** SNAPSHOT-based development (currently 1.0.2-SNAPSHOT)
-- **Release Process:** CI/CD with Maven Central and P2 deployment
+- **Versioning:** `1.0.5-SNAPSHOT` (Maven) / `1.0.5.qualifier` (Eclipse/Tycho)
+- **Branching Model:** GitFlow — feature branches (`feature/JNG-*`), release branches, bugfix/hotfix/support branches
+- **CI/CD:** GitHub Actions — automatic build, test, deploy, and release workflows
+- **Issue Tracking:** JIRA (JNG-* tickets)
+
+## Important Notes
+
+1. All commits must reference a JIRA ticket number (e.g., `JNG-123`). No commit without a ticket number.
+2. No Lombok — Tycho does not support it. All source code is generated or hand-written.
+3. OSGi manifests (`META-INF/MANIFEST.MF`) must be updated when public API changes — they declare bundle exports and imports independently from Maven dependencies.
+4. The `adapter-asm` module exports a single package: `hu.blackbelt.judo.meta.expression.adapters.asm`
+5. The `builder-jql-asm` module exports a single package: `hu.blackbelt.judo.meta.expression.builder.jql.asm`
+6. Version numbers use `${revision}` property with Tycho qualifier conversion between Maven (`-SNAPSHOT`) and Eclipse (`.qualifier`) formats.
+7. P2 update site URLs encode version numbers. Use the `update-category-versions` profile to synchronize them.
+8. The `AsmModelAdapter` constructor requires two `ResourceSet` arguments: one for ASM model and one for Measure model.
 
 ## Related Documentation
 
-- `docs/validation/README.md` - Validation testing overview
-- `openspec/AGENTS.md` - OpenSpec workflow for spec-driven development
-- `openspec/project.md` - Project conventions for OpenSpec
-- [Zeta Framework Documentation](https://github.com/BlackBeltTechnology/judo-zeta) - Java validation framework
-- [judo-meta-expression](https://github.com/BlackBeltTechnology/judo-meta-expression) - Expression metamodel
-- [judo-meta-esm](https://github.com/BlackBeltTechnology/judo-meta-esm) - ESM metamodel with similar validation pattern
+- [README.md](README.md) — Project introduction and architecture overview
+- [CONTRIBUTING.md](CONTRIBUTING.md) — Development setup, code structure, and submission guidelines
+- [.github/CIFLOW.md](.github/CIFLOW.md) — Branching strategy and CI/CD pipeline details
+- [judo-community](https://github.com/BlackBeltTechnology/judo-community) — Parent ecosystem documentation
