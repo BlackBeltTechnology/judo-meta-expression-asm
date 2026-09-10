@@ -1,0 +1,5 @@
+# `osgi-itest/src/test/resources` — Karaf feature repository consumed by the Pax Exam container
+
+| File | Purpose |
+|---|---|
+| `test-features.xml` | Karaf features XML (`features name="judo-TEST"`, schema `v1.5.0`) declaring the single feature `test` version `1` that the Pax Exam container installs. Pulls repositories for CXF, `hu.blackbelt.osgi.utils`, and the blackbelt karaf-features families (google, bouncycastle, apache-commons, apache-httpclient, apache-poi, eclipse-emf, tinybundles, antlr, eclipse-epsilon) plus `hu.blackbelt.epsilon/features`. Feature `test` requires `wrap`, `shell`, `scr` as `prerequisite="true"` (installed in a prior resolution pass), then `osgi-utils`, `tinybundles`, `cxf-jaxrs`, `cxf-jackson`, `cxf-rs-description-swagger2`, `eclipse-emf`, `guava-31`, `epsilon-runtime`, and three Zeta validation bundles `hu.blackbelt.judo.zeta.annotations`, `.common`, `.validation-core`. Versions are `${cxf-version}`, `${osgi-utils-version}`, `${karaf-features-version}`, `${epsilon-runtime-version}`, `${judo-zeta-version}` — resolved by the `pom.xml` resource filter, so an unfiltered copy of this file leaves unresolvable `mvn:` URLs. |
