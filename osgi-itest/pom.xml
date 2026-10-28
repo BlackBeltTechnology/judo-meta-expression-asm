@@ -167,6 +167,23 @@
             <artifactId>hu.blackbelt.judo.meta.expression.model.adapter.asm</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Zeta Validation Framework bundles for OSGi -->
+        <dependency>
+            <groupId>hu.blackbelt.judo.zeta</groupId>
+            <artifactId>hu.blackbelt.judo.zeta.validation-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.zeta</groupId>
+            <artifactId>hu.blackbelt.judo.zeta.annotations</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>hu.blackbelt.judo.zeta</groupId>
+            <artifactId>hu.blackbelt.judo.zeta.common</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

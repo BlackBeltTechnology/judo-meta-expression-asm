@@ -1,0 +1,5 @@
+# `builder-jql-asm/src/main/java/hu/blackbelt/judo/meta/expression/builder/jql/asm` — entry point that extracts JQL strings out of an ASM model into an expression model
+
+| File | Purpose |
+|---|---|
+| `AsmJqlExtractor.java` | Wires JQL extraction to Ecore/ASM by subclassing `AdaptableJqlExtractor` with an `AsmModelAdapter(asmResourceSet, measureResourceSet)` — the derived-feature JQL it collects comes from ASM `expression` extension annotations on `EAttribute`/`EReference`. Four constructors: `(asmResourceSet, measureResourceSet, expressionResourceSet[, JqlExpressionBuilderConfig])` and `(asmResourceSet, measureResourceSet, URI uri[, JqlExpressionBuilderConfig])`, the URI forms building the target set via `ExpressionModelResourceSupport.expressionModelResourceSupportBuilder().uri(uri)`. A `null` `measureResourceSet` is tolerated — an empty set from `MeasureModelResourceSupport.createMeasureResourceSet()` is substituted, so measured attributes silently resolve to no unit instead of failing. The config-less overloads pass a default `JqlExpressionBuilderConfig()`. |

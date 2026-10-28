@@ -60,6 +60,9 @@ import static hu.blackbelt.judo.meta.measure.util.builder.MeasureBuilders.*;
 import static hu.blackbelt.judo.meta.measure.util.builder.MeasureBuilders.newBaseMeasureTermBuilder;
 import static org.eclipse.emf.ecore.util.builder.EcoreBuilders.*;
 import static org.eclipse.emf.ecore.util.builder.EcoreBuilders.useEPackage;
+import java.util.Arrays;
+import java.util.Collections;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -235,7 +238,11 @@ public class ExpressionWithASMAdapterBundleITest {
 
     @Test
     public void testModelValidation() throws Exception {
-        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel);
+        // The expression model contains (1[kg] + 10) which is invalid (mixing measured and unmeasured values)
+        // So we expect the MeasureOfAdditionIsValid error
+        validateExpressionOnAsm(log, asmModel, measureModel, expressionModel,
+                Arrays.asList("MeasureOfAdditionIsValid|Measures of addition are not matching: (1[kg] + 10)"),
+                Collections.emptyList());
     }
 
     private void populateExpressionModel(ExpressionModel expressionModel) {

@@ -104,10 +104,12 @@
         <cxf-version>3.4.4</cxf-version>
         <pax-exam-version>4.13.5</pax-exam-version>
 
-		<judo-meta-expression-version>1.0.5.20260312_050411_8c879fe1_develop</judo-meta-expression-version>
-        <judo-meta-asm-version>1.1.4.20260312_050057_b71fcea9_develop</judo-meta-asm-version>
+		<judo-meta-expression-version>1.0.5-SNAPSHOT</judo-meta-expression-version>
+        <judo-meta-asm-version>1.1.4-SNAPSHOT</judo-meta-asm-version>
         <judo-meta-jql-version>1.0.4.20260312_044738_20a09856_develop</judo-meta-jql-version>
-        <judo-meta-measure-version>1.0.2.20260312_045735_df1ac44d_develop</judo-meta-measure-version>
+        <judo-meta-measure-version>1.0.2-SNAPSHOT</judo-meta-measure-version>
+
+        <judo-zeta-version>1.0.0-SNAPSHOT</judo-zeta-version>
 
         <osgi-utils-version>1.1.1.20260312_044531_b5e27500_develop</osgi-utils-version>
         <karaf-features-version>2.0.2.20260311_090833_f7f05880_develop</karaf-features-version>
@@ -743,6 +745,23 @@
                 <artifactId>hu.blackbelt.judo.meta.expression.asm.model.test</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- Zeta Validation Framework -->
+            <dependency>
+                <groupId>hu.blackbelt.judo.zeta</groupId>
+                <artifactId>hu.blackbelt.judo.zeta.validation-core</artifactId>
+                <version>${judo-zeta-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>hu.blackbelt.judo.zeta</groupId>
+                <artifactId>hu.blackbelt.judo.zeta.annotations</artifactId>
+                <version>${judo-zeta-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>hu.blackbelt.judo.zeta</groupId>
+                <artifactId>hu.blackbelt.judo.zeta.common</artifactId>
+                <version>${judo-zeta-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
