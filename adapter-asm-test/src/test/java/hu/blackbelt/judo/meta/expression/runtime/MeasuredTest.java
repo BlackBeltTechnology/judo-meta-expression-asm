@@ -20,30 +20,35 @@ package hu.blackbelt.judo.meta.expression.runtime;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.ExecutionContextOnAsmTest;
+import hu.blackbelt.judo.meta.expression.adapters.asm.validation.AbstractExpressionAsmValidationTest;
+import hu.blackbelt.judo.meta.expression.adapters.asm.validation.ValidatorType;
 import hu.blackbelt.judo.meta.expression.operator.DecimalOperator;
 import hu.blackbelt.judo.meta.expression.support.ExpressionModelResourceSupport;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.emf.common.util.URI;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static hu.blackbelt.judo.meta.expression.constant.util.builder.ConstantBuilders.newDecimalConstantBuilder;
 import static hu.blackbelt.judo.meta.expression.constant.util.builder.ConstantBuilders.newMeasuredDecimalBuilder;
 import static hu.blackbelt.judo.meta.expression.numeric.util.builder.NumericBuilders.newDecimalArithmeticExpressionBuilder;
 
 @Slf4j
-public class MeasuredTest extends ExecutionContextOnAsmTest {
+public class MeasuredTest extends AbstractExpressionAsmValidationTest {
+
+    private final ExecutionContextOnAsmTest context = new ExecutionContextOnAsmTest();
 
     @BeforeEach
     public void setUp() throws Exception {
-        super.setUp();
+        context.setUp();
+        setModelAdapter(context.asmModel, context.measureModel);
 
         final ExpressionModelResourceSupport expressionModelResourceSupport = ExpressionModelResourceSupport.expressionModelResourceSupportBuilder()
                 .uri(URI.createURI("expr:test"))
@@ -79,13 +84,17 @@ public class MeasuredTest extends ExecutionContextOnAsmTest {
                 .build();
     }
 
-    @Test
-    void testAdditionOfMeasuredConstants() throws Exception {
-        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
-            validateExpressionOnAsm(bufferedLog,
-                                    asmModel, measureModel, expressionModel,
-                                    Arrays.asList("MeasureOfAdditionIsValid|Measures of addition are not matching: (1[kg] + 10)"),
-                                    Collections.emptyList());
-        }
+    @ParameterizedTest(name = "testAdditionOfMeasuredConstants [{0}]")
+    @EnumSource(ValidatorType.class)
+    void testAdditionOfMeasuredConstants(ValidatorType type) throws Exception {
+        this.validatorType = type;
+        // EVL returns full message, Java (Zeta) returns just constraint ID
+        Collection<String> expectedErrors = type == ValidatorType.EVL
+                ? Arrays.asList("MeasureOfAdditionIsValid|Measures of addition are not matching: (1[kg] + 10)")
+                : Arrays.asList("MeasureOfAdditionIsValid");
+        runValidation(
+                expectedErrors,
+                Collections.emptyList()
+        );
     }
 }

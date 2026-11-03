@@ -218,22 +218,29 @@ public class AsmModelAdapter implements
 
     @Override
     public Optional<? extends EReference> getReference(final EClass clazz, final String referenceName) {
+        if (clazz == null) {
+            return Optional.empty();
+        }
         return clazz.getEAllReferences().stream().filter(r -> Objects.equals(r.getName(), referenceName)).findAny();
     }
 
     @Override
     public Optional<? extends EReference> getTransferRelation(EClass transferObject, String relationName) {
+        if (transferObject == null) {
+            return Optional.empty();
+        }
         return transferObject.getEAllReferences().stream().filter(r -> Objects.equals(r.getName(), relationName)).findAny();
     }
 
     @Override
     public boolean isCollection(final ReferenceSelector referenceSelector) {
-        return ((EReference) referenceSelector.getReference(this)).isMany();
+        EReference reference = (EReference) referenceSelector.getReference(this);
+        return reference != null && reference.isMany();
     }
 
     @Override
     public boolean isCollectionReference(EReference reference) {
-        return reference.isMany();
+        return reference != null && reference.isMany();
     }
 
     @Override
@@ -268,31 +275,43 @@ public class AsmModelAdapter implements
 
     @Override
     public EClass getTarget(final EReference reference) {
-        return reference.getEReferenceType();
+        return reference != null ? reference.getEReferenceType() : null;
     }
 
     @Override
     public EClass getTransferRelationTarget(EReference relation) {
-        return relation.getEReferenceType();
+        return relation != null ? relation.getEReferenceType() : null;
     }
 
     @Override
     public Optional<? extends EAttribute> getAttribute(final EClass clazz, final String attributeName) {
+        if (clazz == null) {
+            return Optional.empty();
+        }
         return clazz.getEAllAttributes().stream().filter(r -> Objects.equals(r.getName(), attributeName)).findAny();
     }
 
     @Override
     public Optional<? extends EAttribute> getTransferAttribute(EClass transferObject, String attributeName) {
+        if (transferObject == null) {
+            return Optional.empty();
+        }
         return transferObject.getEAllAttributes().stream().filter(r -> Objects.equals(r.getName(), attributeName)).findAny();
     }
 
     @Override
     public Optional<? extends EDataType> getAttributeType(EAttribute attribute) {
+        if (attribute == null) {
+            return Optional.empty();
+        }
         return Optional.ofNullable(attribute.getEAttributeType());
     }
 
     @Override
     public Optional<? extends EDataType> getAttributeType(final EClass clazz, final String attributeName) {
+        if (clazz == null) {
+            return Optional.empty();
+        }
         return getAttribute(clazz, attributeName).map(EAttribute::getEAttributeType);
     }
 

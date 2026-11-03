@@ -20,30 +20,34 @@ package hu.blackbelt.judo.meta.expression.runtime;
  * #L%
  */
 
-import hu.blackbelt.epsilon.runtime.execution.impl.BufferedSlf4jLogger;
 import hu.blackbelt.judo.meta.expression.ExecutionContextOnAsmTest;
+import hu.blackbelt.judo.meta.expression.adapters.asm.validation.AbstractExpressionAsmValidationTest;
+import hu.blackbelt.judo.meta.expression.adapters.asm.validation.ValidatorType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
-import static hu.blackbelt.judo.meta.expression.adapters.asm.ExpressionValidatorOnAsm.validateExpressionOnAsm;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
-class FullAsmTest extends ExecutionContextOnAsmTest {
+class FullAsmTest extends AbstractExpressionAsmValidationTest {
+
+    private final ExecutionContextOnAsmTest context = new ExecutionContextOnAsmTest();
 
     @BeforeEach
     public void setUp() throws Exception {
-        super.setUp();
+        context.setUp();
+        setModelAdapter(context.asmModel, context.measureModel);
         expressionModel = ExpressionModelForTest.createExpressionModel();
         log.info(expressionModel.getDiagnosticsAsString());
         assertTrue(expressionModel.isValid());
     }
 
-    @Test
-    void test() throws Exception {
-        try (BufferedSlf4jLogger bufferedLog = new BufferedSlf4jLogger(log)) {
-            validateExpressionOnAsm(bufferedLog, asmModel, measureModel, expressionModel);
-        }
+    @ParameterizedTest(name = "testValidExpression [{0}]")
+    @EnumSource(ValidatorType.class)
+    void test(ValidatorType type) throws Exception {
+        this.validatorType = type;
+        runValidation();
     }
 }

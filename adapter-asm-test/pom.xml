@@ -78,6 +78,12 @@
 			<artifactId>epsilon-runtime-execution</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- Zeta validation framework - required for ExpressionZetaValidator class loading -->
+		<dependency>
+			<groupId>hu.blackbelt.judo.zeta</groupId>
+			<artifactId>hu.blackbelt.judo.zeta.validation-core</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 </project>
