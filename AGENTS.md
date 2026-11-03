@@ -132,7 +132,7 @@ mvn clean install -P update-category-versions -f site/pom.xml
 ### Core technologies
 - **Eclipse EMF** (2.21+) — Eclipse Modeling Framework for metamodel-driven development
 - **Tycho** (4.0.13) — Maven plugin for building Eclipse plugins and OSGi bundles
-- **Epsilon Runtime** (2.8.0) — Model transformation and execution engine
+- **Epsilon Runtime** (2.8.0) — Model transformation and execution engine; `adapter-asm/pom.xml` declares `epsilon-runtime-execution` `provided` (adapter has no Epsilon code). See change: split-etl-artifacts.
 - **OSGi** — Module system for Java; bundles declare imports/exports in `META-INF/MANIFEST.MF`
 
 ### External model dependencies
